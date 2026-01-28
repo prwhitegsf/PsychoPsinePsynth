@@ -11,7 +11,7 @@
 
 //==============================================================================
 PsychoPsinePsynthAudioProcessorEditor::PsychoPsinePsynthAudioProcessorEditor (PsychoPsinePsynthAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p),
+    : AudioProcessorEditor (&p), audioProcessor (p), scaleComponent(p.apvts, p.scale.getNames()),
     toneComponent0(p.apvts, 0),
     toneComponent1(p.apvts, 1),
     toneComponent2(p.apvts, 2),
@@ -30,7 +30,7 @@ PsychoPsinePsynthAudioProcessorEditor::PsychoPsinePsynthAudioProcessorEditor (Ps
     initLabel(rmLabel, "Ring Mod");
     initLabel(mixerLabel, "Mixer");
 
-
+    addAndMakeVisible(scaleComponent);
     addAndMakeVisible(globalHold);
 
     setSize(1000, 830);
@@ -58,8 +58,10 @@ void PsychoPsinePsynthAudioProcessorEditor::resized()
     fmLabel.setBounds(0, 0, 1000, 20);
     crLabel.setBounds(0, 200, 1000, 20);
     rmLabel.setBounds(0, 390, 1000, 20);
-
     mixerLabel.setBounds(0, 580, 1000, 20);
+    
+    scaleComponent.setBounds(0, 720, 230, 100);
+    globalHold.setBounds(scaleComponent.getRight(), 720, 130, 100);
 }
 
 void PsychoPsinePsynthAudioProcessorEditor::initLabel(juce::Label& label, juce::String text)

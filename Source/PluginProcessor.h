@@ -59,7 +59,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     juce::AudioProcessorValueTreeState apvts;
-
+    Scale scale;
    
 private:
     static const int toneCount = 4;

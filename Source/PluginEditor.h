@@ -38,7 +38,7 @@ private:
 
     void initLabel(juce::Label& label, juce::String text);
 
-  //  ScaleComponent scaleComponent;
+    ScaleComponent scaleComponent;
     ToneComponent toneComponent0;
     ToneComponent toneComponent1;
     ToneComponent toneComponent2;
