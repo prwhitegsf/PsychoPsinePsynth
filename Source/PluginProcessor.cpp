@@ -19,7 +19,7 @@ PsychoPsinePsynthAudioProcessor::PsychoPsinePsynthAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
 }
@@ -77,16 +77,16 @@ int PsychoPsinePsynthAudioProcessor::getCurrentProgram()
     return 0;
 }
 
-void PsychoPsinePsynthAudioProcessor::setCurrentProgram (int index)
+void PsychoPsinePsynthAudioProcessor::setCurrentProgram (int)
 {
 }
 
-const juce::String PsychoPsinePsynthAudioProcessor::getProgramName (int index)
+const juce::String PsychoPsinePsynthAudioProcessor::getProgramName (int)
 {
     return {};
 }
 
-void PsychoPsinePsynthAudioProcessor::changeProgramName (int index, const juce::String& newName)
+void PsychoPsinePsynthAudioProcessor::changeProgramName (int, const juce::String& )
 {
 }
 
@@ -183,9 +183,18 @@ void PsychoPsinePsynthAudioProcessor::setStateInformation (const void* data, int
     // whose contents will have been created by the getStateInformation() call.
 }
 
+juce::AudioProcessorValueTreeState::ParameterLayout PsychoPsinePsynthAudioProcessor::createParams()
+{
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    return { params.begin(), params.end() };
+}
+
 //==============================================================================
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
+
+
     return new PsychoPsinePsynthAudioProcessor();
 }

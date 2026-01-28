@@ -9,6 +9,11 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Data/AudioEngine.h"
+#include "Scales/Scale.h"
+#include "Data/Voice.h"
+#include "Data/ParameterIds/OscillatorIds.h"
+#include "Data/ParameterIds/MixerIds.h"
 
 //==============================================================================
 /**
@@ -45,15 +50,22 @@ public:
     //==============================================================================
     int getNumPrograms() override;
     int getCurrentProgram() override;
-    void setCurrentProgram (int index) override;
-    const juce::String getProgramName (int index) override;
-    void changeProgramName (int index, const juce::String& newName) override;
+    void setCurrentProgram (int ) override;
+    const juce::String getProgramName (int) override;
+    void changeProgramName (int, const juce::String&) override;
 
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    juce::AudioProcessorValueTreeState apvts;
+
 private:
+    const int toneCount = 4;
+
+    juce::AudioProcessorValueTreeState::ParameterLayout createParams();
+
+    AudioEngine synth;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PsychoPsinePsynthAudioProcessor)
 };

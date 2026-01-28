@@ -4,6 +4,32 @@
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
   <MAINGROUP id="fcTRpN" name="PsychoPsinePsynth">
     <GROUP id="{1DE0CD54-F5BC-9AF4-3563-9C4DAF72C933}" name="Source">
+      <GROUP id="{83C47E5E-2CED-3AA2-6B4E-32CCE5A416D5}" name="Scales">
+        <FILE id="dUs8i1" name="Scale.cpp" compile="1" resource="0" file="Source/Scales/Scale.cpp"/>
+        <FILE id="GCl41f" name="Scale.h" compile="0" resource="0" file="Source/Scales/Scale.h"/>
+      </GROUP>
+      <GROUP id="{E66DE750-7069-AF58-D822-DE7BB971D34D}" name="UI">
+        <GROUP id="{CDB56EC9-F4BC-9810-0997-5ED860E0DDB7}" name="SubComponents">
+          <GROUP id="{D4CCFC2B-A0AC-89F2-1771-6F59ED1B20C4}" name="CustomComponents"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{D424F722-B69C-2123-FE2B-A52EADCC60F0}" name="Data">
+        <FILE id="oL3xpL" name="Voice.cpp" compile="1" resource="0" file="Source/Data/Voice.cpp"/>
+        <FILE id="Huf20e" name="Voice.h" compile="0" resource="0" file="Source/Data/Voice.h"/>
+        <FILE id="k50BJn" name="AudioEngine.cpp" compile="1" resource="0" file="Source/Data/AudioEngine.cpp"/>
+        <FILE id="UIZgfa" name="AudioEngine.h" compile="0" resource="0" file="Source/Data/AudioEngine.h"/>
+        <GROUP id="{AAB8FFBD-F880-E0CD-39A6-3E14A484869E}" name="MixerModules"/>
+        <GROUP id="{29408FF0-B83E-BF27-D629-1EEEF461D894}" name="ToneModules">
+          <GROUP id="{9200B112-1680-201A-9574-CFACB688F3B0}" name="ToneSubModules"/>
+        </GROUP>
+        <GROUP id="{ED3C0EE5-2501-980E-CDCF-DDB9BBC2E3EA}" name="ParameterIds">
+          <FILE id="lCnyZE" name="MixerIds.cpp" compile="1" resource="0" file="Source/Data/ParameterIds/MixerIds.cpp"/>
+          <FILE id="C0KVSs" name="MixerIds.h" compile="0" resource="0" file="Source/Data/ParameterIds/MixerIds.h"/>
+          <FILE id="yVNNCe" name="OscillatorIds.cpp" compile="1" resource="0"
+                file="Source/Data/ParameterIds/OscillatorIds.cpp"/>
+          <FILE id="gE32HU" name="OscillatorIds.h" compile="0" resource="0" file="Source/Data/ParameterIds/OscillatorIds.h"/>
+        </GROUP>
+      </GROUP>
       <FILE id="Jshui2" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="vM6PVt" name="PluginProcessor.h" compile="0" resource="0"
