@@ -10,6 +10,10 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "UI/ToneComponent.h"
+#include "UI/ScaleComponent.h"
+#include "UI/KeyboardComponent.h"
+#include "UI/GlobalHoldComponent.h"
 
 //==============================================================================
 /**
@@ -25,9 +29,24 @@ public:
     void resized() override;
 
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
     PsychoPsinePsynthAudioProcessor& audioProcessor;
+
+    juce::Label fmLabel;
+    juce::Label crLabel;
+    juce::Label rmLabel;
+    juce::Label mixerLabel;
+
+    void initLabel(juce::Label& label, juce::String text);
+
+  //  ScaleComponent scaleComponent;
+    ToneComponent toneComponent0;
+    ToneComponent toneComponent1;
+    ToneComponent toneComponent2;
+    ToneComponent toneComponent3;
+    GlobalHoldComponent globalHold;
+
+    juce::MidiKeyboardState keyboardState;
+    KeyboardComponent keyboardComponent;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PsychoPsinePsynthAudioProcessorEditor)
 };

@@ -10,8 +10,62 @@
       </GROUP>
       <GROUP id="{E66DE750-7069-AF58-D822-DE7BB971D34D}" name="UI">
         <GROUP id="{CDB56EC9-F4BC-9810-0997-5ED860E0DDB7}" name="SubComponents">
-          <GROUP id="{D4CCFC2B-A0AC-89F2-1771-6F59ED1B20C4}" name="CustomComponents"/>
+          <GROUP id="{D4CCFC2B-A0AC-89F2-1771-6F59ED1B20C4}" name="CustomComponents">
+            <FILE id="nl1sp8" name="CustomCB.cpp" compile="1" resource="0" file="Source/UI/SubComponents/CustomComponents/CustomCB.cpp"/>
+            <FILE id="BG62wq" name="CustomCB.h" compile="0" resource="0" file="Source/UI/SubComponents/CustomComponents/CustomCB.h"/>
+            <FILE id="q65GpQ" name="NumBox.cpp" compile="1" resource="0" file="Source/UI/SubComponents/CustomComponents/NumBox.cpp"/>
+            <FILE id="vimSTF" name="NumBox.h" compile="0" resource="0" file="Source/UI/SubComponents/CustomComponents/NumBox.h"/>
+            <FILE id="HztkyE" name="SmallRotaryDial.cpp" compile="1" resource="0"
+                  file="Source/UI/SubComponents/CustomComponents/SmallRotaryDial.cpp"/>
+            <FILE id="SIjfFh" name="SmallRotaryDial.h" compile="0" resource="0"
+                  file="Source/UI/SubComponents/CustomComponents/SmallRotaryDial.h"/>
+          </GROUP>
+          <FILE id="hBBxj3" name="AdsrComponent.cpp" compile="1" resource="0"
+                file="Source/UI/SubComponents/AdsrComponent.cpp"/>
+          <FILE id="wwdh3r" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/SubComponents/AdsrComponent.h"/>
+          <FILE id="oL9CEr" name="FilterComponent.cpp" compile="1" resource="0"
+                file="Source/UI/SubComponents/FilterComponent.cpp"/>
+          <FILE id="cg9Khs" name="FilterComponent.h" compile="0" resource="0"
+                file="Source/UI/SubComponents/FilterComponent.h"/>
+          <FILE id="uMr1wY" name="FreqMultComponent.cpp" compile="1" resource="0"
+                file="Source/UI/SubComponents/FreqMultComponent.cpp"/>
+          <FILE id="Wldqsz" name="FreqMultComponent.h" compile="0" resource="0"
+                file="Source/UI/SubComponents/FreqMultComponent.h"/>
+          <FILE id="OEHErW" name="LevelComponent.cpp" compile="1" resource="0"
+                file="Source/UI/SubComponents/LevelComponent.cpp"/>
+          <FILE id="rV3Km0" name="LevelComponent.h" compile="0" resource="0"
+                file="Source/UI/SubComponents/LevelComponent.h"/>
+          <FILE id="sFm6PG" name="LfoComponent.cpp" compile="1" resource="0"
+                file="Source/UI/SubComponents/LfoComponent.cpp"/>
+          <FILE id="AMpgRR" name="LfoComponent.h" compile="0" resource="0" file="Source/UI/SubComponents/LfoComponent.h"/>
+          <FILE id="u8iHLY" name="NumBoxComponent.cpp" compile="1" resource="0"
+                file="Source/UI/SubComponents/NumBoxComponent.cpp"/>
+          <FILE id="wgjNNm" name="NumBoxComponent.h" compile="0" resource="0"
+                file="Source/UI/SubComponents/NumBoxComponent.h"/>
+          <FILE id="IbGiba" name="OscUnitComponent.cpp" compile="1" resource="0"
+                file="Source/UI/SubComponents/OscUnitComponent.cpp"/>
+          <FILE id="biaI8k" name="OscUnitComponent.h" compile="0" resource="0"
+                file="Source/UI/SubComponents/OscUnitComponent.h"/>
         </GROUP>
+        <FILE id="TvTNPu" name="GlobalHoldComponent.cpp" compile="1" resource="0"
+              file="Source/UI/GlobalHoldComponent.cpp"/>
+        <FILE id="RtSlLB" name="GlobalHoldComponent.h" compile="0" resource="0"
+              file="Source/UI/GlobalHoldComponent.h"/>
+        <FILE id="hRXj9w" name="KeyboardComponent.cpp" compile="1" resource="0"
+              file="Source/UI/KeyboardComponent.cpp"/>
+        <FILE id="hYEsmK" name="KeyboardComponent.h" compile="0" resource="0"
+              file="Source/UI/KeyboardComponent.h"/>
+        <FILE id="vtXvu6" name="MixerComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MixerComponent.cpp"/>
+        <FILE id="JTPQLL" name="MixerComponent.h" compile="0" resource="0"
+              file="Source/UI/MixerComponent.h"/>
+        <FILE id="Aucl7D" name="ScaleComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ScaleComponent.cpp"/>
+        <FILE id="PSilRp" name="ScaleComponent.h" compile="0" resource="0"
+              file="Source/UI/ScaleComponent.h"/>
+        <FILE id="v1OW6C" name="ToneComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ToneComponent.cpp"/>
+        <FILE id="XQyGah" name="ToneComponent.h" compile="0" resource="0" file="Source/UI/ToneComponent.h"/>
       </GROUP>
       <GROUP id="{D424F722-B69C-2123-FE2B-A52EADCC60F0}" name="Data">
         <FILE id="oL3xpL" name="Voice.cpp" compile="1" resource="0" file="Source/Data/Voice.cpp"/>
