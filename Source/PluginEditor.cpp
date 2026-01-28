@@ -18,6 +18,8 @@ PsychoPsinePsynthAudioProcessorEditor::PsychoPsinePsynthAudioProcessorEditor (Ps
     toneComponent3(p.apvts, 3),
     keyboardComponent(keyboardState, juce::MidiKeyboardComponent::Orientation::horizontalKeyboard)
 {
+    startTimerHz(10);
+
     addAndMakeVisible(toneComponent0);
     addAndMakeVisible(toneComponent1);
     addAndMakeVisible(toneComponent2);
