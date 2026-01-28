@@ -10,9 +10,26 @@
 
 #pragma once
 #include <JuceHeader.h>
+#include "MixerModules/Mixer.h"
+#include "Voice.h"
 
 class AudioEngine : public juce::Synthesiser
 {
 public:
     AudioEngine();
+
+    std::array<double, 128> keyboard;
+
+    void renderVoices(juce::AudioBuffer<float>& buffer, int startSample, int numSamples) override;
+
+    std::array<Mixer, 4> mixers;
+    void updateMixers(int idx, const float lpFreq, const float lpQ,
+        const float hpFreq, const float hpQ, const float gain, const float pan);
+
+
+private:
+    static const int numVoices = 8;
+    juce::AudioBuffer<float> tempBuff;
+
 };
+

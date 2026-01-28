@@ -61,7 +61,35 @@ void PsychoPsinePsynthAudioProcessorEditor::resized()
     mixerLabel.setBounds(0, 580, 1000, 20);
     
     scaleComponent.setBounds(0, 720, 230, 100);
-    globalHold.setBounds(scaleComponent.getRight(), 720, 130, 100);
+    globalHold.setBounds(scaleComponent.getRight(), 720, 770, 100);
+}
+
+void PsychoPsinePsynthAudioProcessorEditor::timerCallback()
+{
+    scaleComponent.notesPerOctave.setText(juce::String(audioProcessor.scale.notesPerOctave), juce::dontSendNotification);
+  //  keyboardComponent.setBaseNote(audioProcessor.scales.baseNote);
+   // keyboardComponent.setNotesPerOctave(audioProcessor.scales.notesPerOctave);
+
+
+
+
+    if (globalHold.holdAll.getToggleState())
+    {
+        globalHold.holdAll.setToggleState(false, juce::dontSendNotification);
+        toneComponent0.holdAllLfo();
+        toneComponent1.holdAllLfo();
+        toneComponent2.holdAllLfo();
+        toneComponent3.holdAllLfo();
+    }
+
+    if (globalHold.releaseAll.getToggleState())
+    {
+        globalHold.releaseAll.setToggleState(false, juce::dontSendNotification);
+        toneComponent0.releaseAllLfo();
+        toneComponent1.releaseAllLfo();
+        toneComponent2.releaseAllLfo();
+        toneComponent3.releaseAllLfo();
+    }
 }
 
 void PsychoPsinePsynthAudioProcessorEditor::initLabel(juce::Label& label, juce::String text)

@@ -58,20 +58,30 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    juce::AudioProcessorValueTreeState apvts;
     Scale scale;
    
 private:
     static const int toneCount = 4;
 
-    juce::AudioProcessorValueTreeState::ParameterLayout createParams();
-
-    AudioEngine synth;
-
     std::array<OscillatorIds, toneCount> carrierIds{ OscillatorIds("CR",0),OscillatorIds("CR",1), OscillatorIds("CR", 2),OscillatorIds("CR",3) };
     std::array<OscillatorIds, toneCount> fmIds{ OscillatorIds("FM",0),OscillatorIds("FM",1), OscillatorIds("FM", 2),OscillatorIds("FM",3) };
     std::array<OscillatorIds, toneCount> rmIds{ OscillatorIds("RM",0),OscillatorIds("RM",1), OscillatorIds("RM", 2),OscillatorIds("RM",3) };
     std::array<MixerIds, toneCount> mixerIds{ MixerIds(0),MixerIds(1),MixerIds(2),MixerIds(3) };
+
+public:
+    juce::AudioProcessorValueTreeState apvts;
+
+private:
+
+    juce::AudioProcessorValueTreeState::ParameterLayout createParams();
+    
+    AudioEngine synth;
+    
+    void updateScale();
+    void updateCarriers(int idx, Voice*& voice) const;
+    void updateFreqMods(int idx, Voice*& voice) const;
+    void updateRingMods(int idx, Voice*& voice) const;
+    void updateMixers(int idx);
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PsychoPsinePsynthAudioProcessor)

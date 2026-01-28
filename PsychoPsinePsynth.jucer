@@ -72,9 +72,29 @@
         <FILE id="Huf20e" name="Voice.h" compile="0" resource="0" file="Source/Data/Voice.h"/>
         <FILE id="k50BJn" name="AudioEngine.cpp" compile="1" resource="0" file="Source/Data/AudioEngine.cpp"/>
         <FILE id="UIZgfa" name="AudioEngine.h" compile="0" resource="0" file="Source/Data/AudioEngine.h"/>
-        <GROUP id="{AAB8FFBD-F880-E0CD-39A6-3E14A484869E}" name="MixerModules"/>
+        <GROUP id="{AAB8FFBD-F880-E0CD-39A6-3E14A484869E}" name="MixerModules">
+          <FILE id="KmNU5v" name="Filter.cpp" compile="1" resource="0" file="Source/Data/MixerModules/Filter.cpp"/>
+          <FILE id="vEbFkB" name="Filter.h" compile="0" resource="0" file="Source/Data/MixerModules/Filter.h"/>
+          <FILE id="lOmFdf" name="Mixer.cpp" compile="1" resource="0" file="Source/Data/MixerModules/Mixer.cpp"/>
+          <FILE id="pRRHme" name="Mixer.h" compile="0" resource="0" file="Source/Data/MixerModules/Mixer.h"/>
+        </GROUP>
         <GROUP id="{29408FF0-B83E-BF27-D629-1EEEF461D894}" name="ToneModules">
-          <GROUP id="{9200B112-1680-201A-9574-CFACB688F3B0}" name="ToneSubModules"/>
+          <GROUP id="{9200B112-1680-201A-9574-CFACB688F3B0}" name="ToneSubModules">
+            <FILE id="ljghGX" name="Lfo.cpp" compile="1" resource="0" file="Source/Data/ToneModules/ToneSubModules/Lfo.cpp"/>
+            <FILE id="qYXyxy" name="Lfo.h" compile="0" resource="0" file="Source/Data/ToneModules/ToneSubModules/Lfo.h"/>
+            <FILE id="L3cIaQ" name="OscillatorBase.cpp" compile="1" resource="0"
+                  file="Source/Data/ToneModules/ToneSubModules/OscillatorBase.cpp"/>
+            <FILE id="YPebZQ" name="OscillatorBase.h" compile="0" resource="0"
+                  file="Source/Data/ToneModules/ToneSubModules/OscillatorBase.h"/>
+          </GROUP>
+          <FILE id="iCbSFm" name="Carrier.cpp" compile="1" resource="0" file="Source/Data/ToneModules/Carrier.cpp"/>
+          <FILE id="o1yRc3" name="Carrier.h" compile="0" resource="0" file="Source/Data/ToneModules/Carrier.h"/>
+          <FILE id="Wpu2GZ" name="FreqMod.cpp" compile="1" resource="0" file="Source/Data/ToneModules/FreqMod.cpp"/>
+          <FILE id="uZxoZp" name="FreqMod.h" compile="0" resource="0" file="Source/Data/ToneModules/FreqMod.h"/>
+          <FILE id="ddsYLs" name="RingMod.cpp" compile="1" resource="0" file="Source/Data/ToneModules/RingMod.cpp"/>
+          <FILE id="Rg0bsr" name="RingMod.h" compile="0" resource="0" file="Source/Data/ToneModules/RingMod.h"/>
+          <FILE id="WX7QFW" name="Tone.cpp" compile="1" resource="0" file="Source/Data/ToneModules/Tone.cpp"/>
+          <FILE id="AjiFey" name="Tone.h" compile="0" resource="0" file="Source/Data/ToneModules/Tone.h"/>
         </GROUP>
         <GROUP id="{ED3C0EE5-2501-980E-CDCF-DDB9BBC2E3EA}" name="ParameterIds">
           <FILE id="lCnyZE" name="MixerIds.cpp" compile="1" resource="0" file="Source/Data/ParameterIds/MixerIds.cpp"/>

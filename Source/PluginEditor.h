@@ -18,7 +18,8 @@
 //==============================================================================
 /**
 */
-class PsychoPsinePsynthAudioProcessorEditor  : public juce::AudioProcessorEditor
+class PsychoPsinePsynthAudioProcessorEditor  : public juce::AudioProcessorEditor,
+    public juce::Timer
 {
 public:
     PsychoPsinePsynthAudioProcessorEditor (PsychoPsinePsynthAudioProcessor&);
@@ -27,6 +28,8 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+
+    void timerCallback() override;
 
 private:
     PsychoPsinePsynthAudioProcessor& audioProcessor;
