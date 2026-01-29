@@ -26,6 +26,8 @@ PsychoPsinePsynthAudioProcessorEditor::PsychoPsinePsynthAudioProcessorEditor (Ps
     addAndMakeVisible(toneComponent3);
 
 
+    keyboardComponent.setMidiChannel(2);
+    keyboardState.addListener(&audioProcessor.getMidiMessageCollector());
 
     initLabel(fmLabel, "Freq Mod");
     initLabel(crLabel, "Carrier");
@@ -33,6 +35,7 @@ PsychoPsinePsynthAudioProcessorEditor::PsychoPsinePsynthAudioProcessorEditor (Ps
     initLabel(mixerLabel, "Mixer");
 
     addAndMakeVisible(scaleComponent);
+    addAndMakeVisible(keyboardComponent);
     addAndMakeVisible(globalHold);
 
     setSize(1000, 830);
@@ -40,6 +43,7 @@ PsychoPsinePsynthAudioProcessorEditor::PsychoPsinePsynthAudioProcessorEditor (Ps
 
 PsychoPsinePsynthAudioProcessorEditor::~PsychoPsinePsynthAudioProcessorEditor()
 {
+    keyboardState.removeListener(&audioProcessor.getMidiMessageCollector());
 }
 
 //==============================================================================
@@ -63,14 +67,15 @@ void PsychoPsinePsynthAudioProcessorEditor::resized()
     mixerLabel.setBounds(0, 580, 1000, 20);
     
     scaleComponent.setBounds(0, 720, 230, 100);
-    globalHold.setBounds(scaleComponent.getRight(), 720, 770, 100);
+    keyboardComponent.setBounds(scaleComponent.getRight(), 720, 640, 100);
+    globalHold.setBounds(keyboardComponent.getRight(), 720, 130, 100);
 }
 
 void PsychoPsinePsynthAudioProcessorEditor::timerCallback()
 {
     scaleComponent.notesPerOctave.setText(juce::String(audioProcessor.scale.notesPerOctave), juce::dontSendNotification);
-  //  keyboardComponent.setBaseNote(audioProcessor.scales.baseNote);
-   // keyboardComponent.setNotesPerOctave(audioProcessor.scales.notesPerOctave);
+    keyboardComponent.setBaseNote(audioProcessor.scale.baseNote);
+    keyboardComponent.setNotesPerOctave(audioProcessor.scale.notesPerOctave);
 
 
 

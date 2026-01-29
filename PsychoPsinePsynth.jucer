@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="iExtIp" name="PsychoPsinePsynth" projectType="audioplug"
-              useAppConfig="0" addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
+              useAppConfig="0" addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1"
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="fcTRpN" name="PsychoPsinePsynth">
     <GROUP id="{1DE0CD54-F5BC-9AF4-3563-9C4DAF72C933}" name="Source">
       <GROUP id="{83C47E5E-2CED-3AA2-6B4E-32CCE5A416D5}" name="Scales">

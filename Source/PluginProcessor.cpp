@@ -94,7 +94,9 @@ void PsychoPsinePsynthAudioProcessor::changeProgramName (int, const juce::String
 //==============================================================================
 void PsychoPsinePsynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+
     synth.setCurrentPlaybackSampleRate(sampleRate);
+    midiMessageCollector.reset(sampleRate);
 
     juce::dsp::ProcessSpec spec{ sampleRate,(std::uint_fast32_t)samplesPerBlock,(std::uint_fast32_t)getTotalNumOutputChannels() };
 
@@ -150,6 +152,7 @@ void PsychoPsinePsynthAudioProcessor::processBlock (juce::AudioBuffer<float>& bu
     auto totalNumInputChannels = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
+    midiMessageCollector.removeNextBlockOfMessages(midiMessages, buffer.getNumSamples());
 
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear(i, 0, buffer.getNumSamples());

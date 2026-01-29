@@ -31,7 +31,7 @@ void KeyboardComponent::mouseDown(const juce::MouseEvent& e)
 
     if (kbState.isNoteOn(2,newNote)) 
     {
-       heldNotes.erase(newNote);
+     //  heldNotes.erase(newNote);
         kbState.noteOff(2,newNote,0);
         return;
     }
@@ -39,7 +39,7 @@ void KeyboardComponent::mouseDown(const juce::MouseEvent& e)
 
 
     kbState.noteOn(2, newNote, 1);
-    heldNotes.insert(newNote);
+ //   heldNotes.insert(newNote);
 
    }
 
@@ -75,13 +75,13 @@ juce::String KeyboardComponent::getWhiteNoteText(int midiNoteNumber)
 }
 
 
-/*
+
 void KeyboardComponent::drawWhiteNote(int midiNoteNumber, juce::Graphics& g, juce::Rectangle<float> area,
     bool isDown, bool isOver, juce::Colour lineColour, juce::Colour textColour)
 {
     auto c = juce::Colours::transparentWhite;
 
-    if (isDown)  c = juce::Colours::red;
+    if (isDown)  c = c.overlaidWith(findColour(keyDownOverlayColourId));
     if (isOver)  c = c.overlaidWith(findColour(mouseOverKeyOverlayColourId));
 
     g.setColour(c);
@@ -187,7 +187,7 @@ void KeyboardComponent::drawBlackNote(int midiNoteNumber, juce::Graphics& g, juc
         }
     }
 
-}*/
+}
 
 
 
