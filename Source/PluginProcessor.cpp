@@ -219,14 +219,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout PsychoPsinePsynthAudioProces
         params.push_back(std::make_unique<juce::AudioParameterFloat>(carrierIds[i].freqMult, carrierIds[i].freqMult.toLowerCase(), juce::NormalisableRange<float> { 0.25f, 4.0f, 0.25f}, 1.0f, ""));
 
         params.push_back(std::make_unique<juce::AudioParameterFloat>(carrierIds[i].tune, carrierIds[i].tune.toLowerCase(), juce::NormalisableRange<float> { -10.0f, 10.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterFloat>(carrierIds[i].tuneLfoRate, carrierIds[i].tuneLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.1f}, 0.0f, ""));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>(carrierIds[i].tuneLfoRate, carrierIds[i].tuneLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.01f}, 30.0f, ""));
         params.push_back(std::make_unique<juce::AudioParameterFloat>(carrierIds[i].tuneLfoAmp, carrierIds[i].tuneLfoAmp.toLowerCase(), juce::NormalisableRange<float> { -10.0f, 10.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterBool>(carrierIds[i].tuneLfoHold, carrierIds[i].tuneLfoHold.toLowerCase(), false));
+        params.push_back(std::make_unique<juce::AudioParameterBool>(carrierIds[i].tuneLfoHold, carrierIds[i].tuneLfoHold.toLowerCase(), true));
 
         params.push_back(std::make_unique<juce::AudioParameterFloat>(carrierIds[i].depth, carrierIds[i].depth.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 1.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterFloat>(carrierIds[i].depthLfoRate, carrierIds[i].depthLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.1f}, 0.0f, ""));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>(carrierIds[i].depthLfoRate, carrierIds[i].depthLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.01f}, 30.0f, ""));
         params.push_back(std::make_unique<juce::AudioParameterFloat>(carrierIds[i].depthLfoAmp, carrierIds[i].depthLfoAmp.toLowerCase(), juce::NormalisableRange<float> { -1.0f, 1.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterBool>(carrierIds[i].depthLfoHold, carrierIds[i].depthLfoHold.toLowerCase(), false));
+        params.push_back(std::make_unique<juce::AudioParameterBool>(carrierIds[i].depthLfoHold, carrierIds[i].depthLfoHold.toLowerCase(), true));
 
 
 
@@ -239,14 +239,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout PsychoPsinePsynthAudioProces
         params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].freqMult, fmIds[i].freqMult.toLowerCase(), juce::NormalisableRange<float> { 0.25f, 4.0f, 0.25f}, 1.0f, ""));
 
         params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].tune, fmIds[i].tune.toLowerCase(), juce::NormalisableRange<float> { -10.0f, 10.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].tuneLfoRate, fmIds[i].tuneLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.1f}, 0.0f, ""));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].tuneLfoRate, fmIds[i].tuneLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.01f}, 30.0f, ""));
         params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].tuneLfoAmp, fmIds[i].tuneLfoAmp.toLowerCase(), juce::NormalisableRange<float> { -10.0f, 10.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterBool>(fmIds[i].tuneLfoHold, fmIds[i].tuneLfoHold.toLowerCase(), false));
+        params.push_back(std::make_unique<juce::AudioParameterBool>(fmIds[i].tuneLfoHold, fmIds[i].tuneLfoHold.toLowerCase(), true));
 
         params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].depth, fmIds[i].depth.toLowerCase(), juce::NormalisableRange<float> { -6.0f, 6.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].depthLfoRate, fmIds[i].depthLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.1f}, 0.0f, ""));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].depthLfoRate, fmIds[i].depthLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.01f}, 30.0f, ""));
         params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].depthLfoAmp, fmIds[i].depthLfoAmp.toLowerCase(), juce::NormalisableRange<float> { -1.0f, 1.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterBool>(fmIds[i].depthLfoHold, fmIds[i].depthLfoHold.toLowerCase(), false));
+        params.push_back(std::make_unique<juce::AudioParameterBool>(fmIds[i].depthLfoHold, fmIds[i].depthLfoHold.toLowerCase(), true));
 
         params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].attack, fmIds[i].attack.toLowerCase(), juce::NormalisableRange<float> { 0.01f, 120.0f, 0.01f}, 1.0f, ""));
         params.push_back(std::make_unique<juce::AudioParameterFloat>(fmIds[i].decay, fmIds[i].decay.toLowerCase(), juce::NormalisableRange<float> { 0.01f, 120.0f, 0.01f}, 1.0f, ""));
@@ -257,14 +257,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout PsychoPsinePsynthAudioProces
         params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].freqMult, rmIds[i].freqMult.toLowerCase(), juce::NormalisableRange<float> { 0.25f, 4.0f, 0.25f}, 1.0f, ""));
 
         params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].tune, rmIds[i].tune.toLowerCase(), juce::NormalisableRange<float> { -10.0f, 10.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].tuneLfoRate, rmIds[i].tuneLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.1f}, 0.0f, ""));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].tuneLfoRate, rmIds[i].tuneLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.01f}, 30.0f, ""));
         params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].tuneLfoAmp, rmIds[i].tuneLfoAmp.toLowerCase(), juce::NormalisableRange<float> { -10.0f, 10.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterBool>(rmIds[i].tuneLfoHold, rmIds[i].tuneLfoHold.toLowerCase(), false));
+        params.push_back(std::make_unique<juce::AudioParameterBool>(rmIds[i].tuneLfoHold, rmIds[i].tuneLfoHold.toLowerCase(), true));
 
         params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].depth, rmIds[i].depth.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].depthLfoRate, rmIds[i].depthLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.1f}, 0.0f, ""));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].depthLfoRate, rmIds[i].depthLfoRate.toLowerCase(), juce::NormalisableRange<float> { 0.0f, 300.0f, 0.01f}, 30.0f, ""));
         params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].depthLfoAmp, rmIds[i].depthLfoAmp.toLowerCase(), juce::NormalisableRange<float> { -1.0f, 1.0f, 0.01f}, 0.0f, ""));
-        params.push_back(std::make_unique<juce::AudioParameterBool>(rmIds[i].depthLfoHold, rmIds[i].depthLfoHold.toLowerCase(), false));
+        params.push_back(std::make_unique<juce::AudioParameterBool>(rmIds[i].depthLfoHold, rmIds[i].depthLfoHold.toLowerCase(), true));
 
         params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].attack, rmIds[i].attack.toLowerCase(), juce::NormalisableRange<float> { 0.01f, 120.0f, 0.01f}, 1.0f, ""));
         params.push_back(std::make_unique<juce::AudioParameterFloat>(rmIds[i].decay, rmIds[i].decay.toLowerCase(), juce::NormalisableRange<float> { 0.01f, 120.0f, 0.01f}, 1.0f, ""));
