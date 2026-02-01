@@ -1,6 +1,6 @@
 ## PsychoPsinePsynth
 
-Four oscillator, eight voice synth
+Four oscillator, eight voice synth geared towards generating pycho-acoustic phenomena
 
 ![synth-image](img/PPP.png)
 
@@ -23,6 +23,13 @@ Four oscillator, eight voice synth
 
 ### Usage
 
+![scale-selection](img/SelectScale-Equal.png)
+![scale-selection](img/SelectScale-Arist.png)
+
+While PPP allows for standard equal temperment tunings, one of its defining features is the ability to work with several different tuning systems.
+Use the dropdown to select the desired tuning. The keyboard updates to show where the octaves occur when the tuning does not have 12 notes/octave.
+
+
 ![TwoOscillators](img/TwoOscillators.png)
 
 When a key is pressed:
@@ -42,4 +49,6 @@ Additionally, each module has an index / amp / depth parameter (3) corresponding
 
 The mixer section provides high and low pass 24db ladder filters along with gain and pan control for each oscillator.
 
+### Known issues
 
+The on-screen 
