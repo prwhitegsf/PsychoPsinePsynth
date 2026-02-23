@@ -13,9 +13,9 @@
 
 RingMod::RingMod()  {}
 
-float RingMod::getNextSample(float carrierSample)
+float RingMod::getNextSample(float tuneSample, float depthSample, float carrierSample)
 {
-    process();
+    process(tuneSample, depthSample);
 
     auto depth = getOutputLevel();
     return (carrierSample * (1.0f - depth)) + (carrierSample * getSample() * depth);

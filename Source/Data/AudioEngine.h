@@ -19,10 +19,12 @@ public:
     AudioEngine();
 
     std::array<double, 128> keyboard;
-
+    std::array<ToneLfos, 4> toneLfos;
+    std::array<Mixer, 4> mixers;
+    
     void renderVoices(juce::AudioBuffer<float>& buffer, int startSample, int numSamples) override;
 
-    std::array<Mixer, 4> mixers;
+  
     void updateMixers(int idx, const float lpFreq, const float lpQ,
         const float hpFreq, const float hpQ, const float gain, const float pan);
 

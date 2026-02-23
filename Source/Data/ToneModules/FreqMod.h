@@ -17,7 +17,7 @@ class FreqMod : public OscillatorBase
 public:
     FreqMod();
 
-      float getNextSample() override;
+      float getNextSample(float tuneSample, float depthSample) override;
 
 
 };

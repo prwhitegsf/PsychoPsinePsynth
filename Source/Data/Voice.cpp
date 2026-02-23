@@ -12,7 +12,7 @@
 
 
 
-Voice::Voice(std::array<double, 128>& keyboard) : kboard(keyboard)
+Voice::Voice(std::array<double, 128>& keyboard, std::array<ToneLfos,4>& tLfos) : kboard(keyboard), toneLfos(tLfos)
 {
 }
 
@@ -60,41 +60,27 @@ void Voice::stopNote(float, bool allowTailOff)
 
 void Voice::renderNextBlock(juce::AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
-    outputBuffer.addSample(0, startSample, tones[numSamples].getNextSample());
+    outputBuffer.addSample(0, startSample, tones[numSamples].getNextSample(toneLfos[numSamples]));
 }
 
-void Voice::updateCarriers(int idx, const float freqMult,
-    const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold,
-    const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold,
+void Voice::updateCarriers(int idx, const float freqMult, const float tune, const float depth,
     const float attack, const float decay, const float sustain, const float release)
 {
-    tones[idx].updateCarrier(
-        freqMult, tune, tuneLfoRate, tuneLfoAmp, tuneLfoHold,
-        depth, depthLfoRate, depthLfoAmp, depthLfoHold,
-        attack, decay, sustain, release);
+    tones[idx].updateCarrier(freqMult, tune, depth, attack, decay, sustain, release);
 
 }
 
-void Voice::updateFreqMods(int idx, const float freqMult,
-    const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold,
-    const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold,
+void Voice::updateFreqMods(int idx, const float freqMult, const float tune, const float depth,
     const float attack, const float decay, const float sustain, const float release)
 {
-    tones[idx].updateFreqMod(
-        freqMult, tune, tuneLfoRate, tuneLfoAmp, tuneLfoHold, depth, depthLfoRate,
-        depthLfoAmp, depthLfoHold, attack, decay, sustain, release);
+    tones[idx].updateFreqMod(freqMult, tune, depth, attack, decay, sustain, release);
 
 }
 
-void Voice::updateRingMods(int idx, const float freqMult,
-    const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold,
-    const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold,
+void Voice::updateRingMods(int idx, const float freqMult, const float tune, const float depth,
     const float attack, const float decay, const float sustain, const float release)
 {
-    tones[idx].updateRingMod(
-        freqMult, tune, tuneLfoRate, tuneLfoAmp, tuneLfoHold,
-        depth, depthLfoRate, depthLfoAmp, depthLfoHold,
-        attack, decay, sustain, release);
+    tones[idx].updateRingMod(freqMult, tune, depth, attack, decay, sustain, release);
 
 }
 

@@ -82,7 +82,9 @@ private:
     void updateCarriers(int idx, Voice*& voice) const;
     void updateFreqMods(int idx, Voice*& voice) const;
     void updateRingMods(int idx, Voice*& voice) const;
+    void updateLfos(int idx);
     void updateMixers(int idx);
+
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PsychoPsinePsynthAudioProcessor)

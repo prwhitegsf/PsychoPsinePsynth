@@ -19,7 +19,7 @@ public:
 
     Carrier();
 
-    float getNextSample(float sample) override;
+    float getNextSample(float tuneSample, float depthSample,float fmSample) override;
 
 private:
     const float amplitudeScalar{ 0.03f };

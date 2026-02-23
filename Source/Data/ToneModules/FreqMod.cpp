@@ -13,11 +13,11 @@
 
 FreqMod::FreqMod(){}
 
-float FreqMod::getNextSample()
+float FreqMod::getNextSample(float tuneSample, float depthSample)
 {
-    process();
+    process(tuneSample,depthSample);
     
-    auto fmIndex = (getFreq() + tuneLfo.getNextSample()) * getOutputLevel();
+    auto fmIndex = (getFreq() + tuneSample) * getOutputLevel();
 
     return getSample() * fmIndex;   
 }

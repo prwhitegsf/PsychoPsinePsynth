@@ -100,6 +100,12 @@ void PsychoPsinePsynthAudioProcessor::prepareToPlay (double sampleRate, int samp
 
     juce::dsp::ProcessSpec spec{ sampleRate,(std::uint_fast32_t)samplesPerBlock,(std::uint_fast32_t)getTotalNumOutputChannels() };
 
+
+    for (auto& toneLfo : synth.toneLfos)
+    {
+        toneLfo.prepare(spec);
+    }
+
     for (auto& mixer : synth.mixers)
     {
         mixer.prepare(spec);
@@ -169,6 +175,7 @@ void PsychoPsinePsynthAudioProcessor::processBlock (juce::AudioBuffer<float>& bu
                 updateFreqMods(j, voice);
                 updateCarriers(j, voice);
                 updateRingMods(j, voice);
+                updateLfos(j);
                 updateMixers(j);
                 voice->clearActiveOffNotes();
             }
@@ -301,24 +308,21 @@ void PsychoPsinePsynthAudioProcessor::updateCarriers(int idx, Voice*& voice) con
 {
     auto& freqMult = *apvts.getRawParameterValue(carrierIds[idx].freqMult);
     auto& tune = *apvts.getRawParameterValue(carrierIds[idx].tune);
-    auto& tuneLfoRate = *apvts.getRawParameterValue(carrierIds[idx].tuneLfoRate);
+   /* auto& tuneLfoRate = *apvts.getRawParameterValue(carrierIds[idx].tuneLfoRate);
     auto& tuneLfoAmp = *apvts.getRawParameterValue(carrierIds[idx].tuneLfoAmp);
-    auto& tuneLfoHold = *apvts.getRawParameterValue(carrierIds[idx].tuneLfoHold);
+    auto& tuneLfoHold = *apvts.getRawParameterValue(carrierIds[idx].tuneLfoHold);*/
 
     auto& depth = *apvts.getRawParameterValue(carrierIds[idx].depth);
-    auto& depthLfoRate = *apvts.getRawParameterValue(carrierIds[idx].depthLfoRate);
+  /*  auto& depthLfoRate = *apvts.getRawParameterValue(carrierIds[idx].depthLfoRate);
     auto& depthLfoAmp = *apvts.getRawParameterValue(carrierIds[idx].depthLfoAmp);
-    auto& depthLfoHold = *apvts.getRawParameterValue(carrierIds[idx].depthLfoHold);
+    auto& depthLfoHold = *apvts.getRawParameterValue(carrierIds[idx].depthLfoHold);*/
 
     auto& attack = *apvts.getRawParameterValue(carrierIds[idx].attack);
     auto& decay = *apvts.getRawParameterValue(carrierIds[idx].decay);
     auto& sustain = *apvts.getRawParameterValue(carrierIds[idx].sustain);
     auto& release = *apvts.getRawParameterValue(carrierIds[idx].release);
 
-    voice->updateCarriers(idx, freqMult,
-        tune, tuneLfoRate, tuneLfoAmp, tuneLfoHold,
-        depth, depthLfoRate, depthLfoAmp, depthLfoHold,
-        attack, decay, sustain, release);
+    voice->updateCarriers(idx, freqMult, tune, depth, attack, decay, sustain, release);
 
 }
 
@@ -327,24 +331,21 @@ void PsychoPsinePsynthAudioProcessor::updateFreqMods(int idx, Voice*& voice) con
     auto& freqMult = *apvts.getRawParameterValue(fmIds[idx].freqMult);
 
     auto& tune = *apvts.getRawParameterValue(fmIds[idx].tune);
-    auto& tuneLfoRate = *apvts.getRawParameterValue(fmIds[idx].tuneLfoRate);
+  /*  auto& tuneLfoRate = *apvts.getRawParameterValue(fmIds[idx].tuneLfoRate);
     auto& tuneLfoAmp = *apvts.getRawParameterValue(fmIds[idx].tuneLfoAmp);
-    auto& tuneLfoHold = *apvts.getRawParameterValue(fmIds[idx].tuneLfoHold);
+    auto& tuneLfoHold = *apvts.getRawParameterValue(fmIds[idx].tuneLfoHold);*/
 
     auto& depth = *apvts.getRawParameterValue(fmIds[idx].depth);
-    auto& depthLfoRate = *apvts.getRawParameterValue(fmIds[idx].depthLfoRate);
+    /*auto& depthLfoRate = *apvts.getRawParameterValue(fmIds[idx].depthLfoRate);
     auto& depthLfoAmp = *apvts.getRawParameterValue(fmIds[idx].depthLfoAmp);
-    auto& depthLfoHold = *apvts.getRawParameterValue(fmIds[idx].depthLfoHold);
+    auto& depthLfoHold = *apvts.getRawParameterValue(fmIds[idx].depthLfoHold);*/
 
     auto& attack = *apvts.getRawParameterValue(fmIds[idx].attack);
     auto& decay = *apvts.getRawParameterValue(fmIds[idx].decay);
     auto& sustain = *apvts.getRawParameterValue(fmIds[idx].sustain);
     auto& release = *apvts.getRawParameterValue(fmIds[idx].release);
 
-    voice->updateFreqMods(idx, freqMult,
-        tune, tuneLfoRate, tuneLfoAmp, tuneLfoHold,
-        depth, depthLfoRate, depthLfoAmp, depthLfoHold,
-        attack, decay, sustain, release);
+    voice->updateFreqMods(idx, freqMult, tune, depth, attack, decay, sustain, release);
 }
 
 void PsychoPsinePsynthAudioProcessor::updateRingMods(int idx, Voice*& voice) const
@@ -352,24 +353,59 @@ void PsychoPsinePsynthAudioProcessor::updateRingMods(int idx, Voice*& voice) con
     auto& freqMult = *apvts.getRawParameterValue(rmIds[idx].freqMult);
 
     auto& tune = *apvts.getRawParameterValue(rmIds[idx].tune);
-    auto& tuneLfoRate = *apvts.getRawParameterValue(rmIds[idx].tuneLfoRate);
+   /* auto& tuneLfoRate = *apvts.getRawParameterValue(rmIds[idx].tuneLfoRate);
     auto& tuneLfoAmp = *apvts.getRawParameterValue(rmIds[idx].tuneLfoAmp);
-    auto& tuneLfoHold = *apvts.getRawParameterValue(rmIds[idx].tuneLfoHold);
+    auto& tuneLfoHold = *apvts.getRawParameterValue(rmIds[idx].tuneLfoHold);*/
 
     auto& depth = *apvts.getRawParameterValue(rmIds[idx].depth);
-    auto& depthLfoRate = *apvts.getRawParameterValue(rmIds[idx].depthLfoRate);
+  /*  auto& depthLfoRate = *apvts.getRawParameterValue(rmIds[idx].depthLfoRate);
     auto& depthLfoAmp = *apvts.getRawParameterValue(rmIds[idx].depthLfoAmp);
-    auto& depthLfoHold = *apvts.getRawParameterValue(rmIds[idx].depthLfoHold);
+    auto& depthLfoHold = *apvts.getRawParameterValue(rmIds[idx].depthLfoHold);*/
 
     auto& attack = *apvts.getRawParameterValue(rmIds[idx].attack);
     auto& decay = *apvts.getRawParameterValue(rmIds[idx].decay);
     auto& sustain = *apvts.getRawParameterValue(rmIds[idx].sustain);
     auto& release = *apvts.getRawParameterValue(rmIds[idx].release);
 
-    voice->updateRingMods(idx, freqMult,
-        tune, tuneLfoRate, tuneLfoAmp, tuneLfoHold,
-        depth, depthLfoRate, depthLfoAmp, depthLfoHold,
-        attack, decay, sustain, release);
+    voice->updateRingMods(idx, freqMult, tune, depth, attack, decay, sustain, release);
+}
+
+
+void PsychoPsinePsynthAudioProcessor::updateLfos(int idx) 
+{
+    // FM
+    auto& fmTuneRate = *apvts.getRawParameterValue(fmIds[idx].tuneLfoRate);
+    auto& fmTuneAmp = *apvts.getRawParameterValue(fmIds[idx].tuneLfoAmp);
+    auto& fmTuneHold = *apvts.getRawParameterValue(fmIds[idx].tuneLfoHold);
+
+    auto& fmDepthRate = *apvts.getRawParameterValue(fmIds[idx].depthLfoRate);
+    auto& fmDepthAmp = *apvts.getRawParameterValue(fmIds[idx].depthLfoAmp);
+    auto& fmDepthHold = *apvts.getRawParameterValue(fmIds[idx].depthLfoHold);
+
+    // Carrier 
+    auto& crTuneRate = *apvts.getRawParameterValue(carrierIds[idx].tuneLfoRate);
+    auto& crTuneAmp = *apvts.getRawParameterValue(carrierIds[idx].tuneLfoAmp);
+    auto& crTuneHold = *apvts.getRawParameterValue(carrierIds[idx].tuneLfoHold);
+
+    auto& crDepthRate = *apvts.getRawParameterValue(carrierIds[idx].depthLfoRate);
+    auto& crDepthAmp = *apvts.getRawParameterValue(carrierIds[idx].depthLfoAmp);
+    auto& crDepthHold = *apvts.getRawParameterValue(carrierIds[idx].depthLfoHold);
+
+    // RM
+    auto& rmTuneRate = *apvts.getRawParameterValue(rmIds[idx].tuneLfoRate);
+    auto& rmTuneAmp = *apvts.getRawParameterValue(rmIds[idx].tuneLfoAmp);
+    auto& rmTuneHold = *apvts.getRawParameterValue(rmIds[idx].tuneLfoHold);
+
+    auto& rmDepthRate = *apvts.getRawParameterValue(rmIds[idx].depthLfoRate);
+    auto& rmDepthAmp = *apvts.getRawParameterValue(rmIds[idx].depthLfoAmp);
+    auto& rmDepthHold = *apvts.getRawParameterValue(rmIds[idx].depthLfoHold);
+
+    synth.toneLfos[idx].updateLfos( fmTuneRate, fmTuneAmp, fmTuneHold,
+                                    fmDepthRate, fmDepthAmp, fmDepthHold,
+                                    crTuneRate, crTuneAmp, crTuneHold,
+                                    crDepthRate, crDepthAmp, crDepthHold,
+                                    rmTuneRate, rmTuneAmp, rmTuneHold,
+                                    rmDepthRate, rmDepthAmp, rmDepthHold);
 }
 
 void PsychoPsinePsynthAudioProcessor::updateMixers(int idx)

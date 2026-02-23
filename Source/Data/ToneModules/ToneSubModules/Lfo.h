@@ -23,15 +23,15 @@ public:
     void setSample();
     float getNextSample();
  
-    inline float getAmplitude() const { return amplitude.getCurrentValue(); }
+    float getAmplitude() const;
 
     bool isActive{ false };
 
 private:
 
-    inline void updateAngle() { angle += angleDelta; }
+    inline void updateAngle();
 
-    const double twoPi = 2.0 * juce::MathConstants<double>::pi;
+   // const double twoPi = 2.0 * juce::MathConstants<double>::pi;
     juce::SmoothedValue<float> amplitude;
     
     float freq{}, sample{};

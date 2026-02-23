@@ -21,8 +21,8 @@ void OscillatorBase::prepare(const juce::dsp::ProcessSpec& spec)
     amplitude.reset(spec.sampleRate, 0.05);
     
     adsr.setSampleRate(spec.sampleRate);
-    tuneLfo.prepare(spec);
-    depthLfo.prepare(spec);
+  //  tuneLfo.prepare(spec);
+  //  depthLfo.prepare(spec);
 
 }
 
@@ -43,75 +43,63 @@ void OscillatorBase::updateParameters(const float freqMult, const float tune, co
     amplitude.setTargetValue(amp);
 }
  
-void  OscillatorBase::process()
+void  OscillatorBase::process(float tuneSample, float depthSample)
 {
     setSample();
-    updateAngle();
-    setOutputLevel();
+    updateAngle(tuneSample);
+    setOutputLevel(depthSample);
 }
     
-void  OscillatorBase::process(const float fmSample) 
+void  OscillatorBase::process(float tuneSample, float depthSample,const float fmSample)
 {
     setSample();
-    updateAngle(fmSample);
-    setOutputLevel();
+    updateAngle(tuneSample,fmSample);
+    setOutputLevel(depthSample);
 }
 
 
 void OscillatorBase::reset()
 {
     angleDelta = 0;
-    tuneLfo.reset();
-    depthLfo.reset();
+    //tuneLfo.reset();
+   // depthLfo.reset();
     adsr.reset();
 }
 
 
 
-void OscillatorBase::setOutputLevel()
+void OscillatorBase::setOutputLevel(const float depthSample)
 {
-    if (depthLfo.isActive)
-        depthLfo.setSample();
-
-    auto depth = (depthLfo.getNextSample() + 1.0f) / 2.0f;
-    auto amp = depthLfo.getAmplitude();
-    outputLevel = ((1.0f - amp) + (depth * amp)) * amplitude.getNextValue() * adsr.getNextSample();
+       outputLevel = depthSample * amplitude.getNextValue() * adsr.getNextSample();
 }
 
 
-float OscillatorBase::getNextSample()
+float OscillatorBase::getNextSample(float tuneSample, float depthSample)
 {
-    process();
+    process(tuneSample, depthSample);
 
     return getSample() * getOutputLevel();
 }
-float OscillatorBase::getNextSample(float fmSample)
+float OscillatorBase::getNextSample(float tuneSample, float depthSample, float fmSample)
 {
-    process(fmSample);
+    process(tuneSample, depthSample,fmSample);
 
     return getSample() * getOutputLevel();
 }
 void OscillatorBase::setSample()
 {
-    sample = angle == 0 ? 0 : (float)(std::sin(angle));
+    sample = (float)(std::sin(angle));
 }
 
 
-void OscillatorBase::updateAngle()
+void OscillatorBase::updateAngle(const float tuneSample)
 {
-    if (tuneLfo.isActive)
-        tuneLfo.setSample();
-
-    angleDelta = ((freq + tuneLfo.getNextSample() + offsetHz.getNextValue()) / sampleRate) * twoPi;
+    angleDelta = ((freq + tuneSample + offsetHz.getNextValue()) / sampleRate) * twoPi;
     angle += angleDelta;
 }
 
-void OscillatorBase::updateAngle(const float fmSample)
+void OscillatorBase::updateAngle(const float tuneSample, const float fmSample)
 {
-
-    if (tuneLfo.isActive)
-        tuneLfo.setSample();
-
-    angleDelta = ((freq + tuneLfo.getNextSample() + fmSample + offsetHz.getNextValue()) / sampleRate) * twoPi;
+    angleDelta = ((freq + tuneSample + fmSample + offsetHz.getNextValue()) / sampleRate) * twoPi;
     angle += angleDelta;
 }

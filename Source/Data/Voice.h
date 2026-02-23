@@ -11,6 +11,7 @@
 #pragma once
 #include <JuceHeader.h>
 #include "ToneModules/Tone.h"
+#include "ToneModules/ToneLfos.h"
 
 
 struct SynthSound : public juce::SynthesiserSound
@@ -22,7 +23,7 @@ struct SynthSound : public juce::SynthesiserSound
 class Voice : public juce::SynthesiserVoice
 {
 public:
-    explicit Voice(std::array<double, 128>& keyboard);
+    Voice(std::array<double, 128>& keyboard, std::array<ToneLfos,4>& tLfos);
 
     bool canPlaySound(juce::SynthesiserSound* sound) override;
 
@@ -38,18 +39,13 @@ public:
 
     void renderNextBlock(juce::AudioSampleBuffer& outputBuffer, int startSample, int numSamples) override;
 
-    void updateCarriers(int idx, const float freqMult,
-        const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold,
-        const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold,
+    void updateCarriers(int idx, const float freqMult,const float tune, const float depth,
         const float attack, const float decay, const float sustain, const float release);
 
-    void updateFreqMods(int idx, const float freqMult,
-        const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold, const float depth, const float depthLfoRate,
-        const float depthLfoAmp, bool depthLfoHold, const float attack, const float decay, const float sustain, const float release);
+    void updateFreqMods(int idx, const float freqMult, const float tune, const float depth,
+        const float attack, const float decay, const float sustain, const float release);
 
-    void updateRingMods(int idx, const float freqMult,
-        const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold,
-        const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold,
+    void updateRingMods(int idx, const float freqMult, const float tune, const float depth,
         const float attack, const float decay, const float sustain, const float release);
 
 
@@ -59,6 +55,7 @@ public:
     //private:
 
     std::array<double, 128>& kboard;
+    std::array<ToneLfos, 4>& toneLfos;
 
     std::array<Tone, 4> tones;
     float currNoteHz{};

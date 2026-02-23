@@ -24,25 +24,25 @@ public:
     void updateParameters(const float freqMult, const float tune, const float amp);
     void reset();
 
-    void process();
-    void process(const float fmSample);
+    void process(float tuneSample, float depthSample);
+    void process(float tuneSample, float depthSample, const float fmSample);
 
     inline float getSample() const { return sample; }
     inline float getFreq() const { return freq; }
     inline float getOutputLevel() const { return outputLevel; }
 
-    virtual float getNextSample();
-    virtual float getNextSample(float sample);
+    virtual float getNextSample(float tuneSample, float depthSample);
+    virtual float getNextSample(float tuneSample, float depthSample, float sample);
     
-    Lfo tuneLfo;
-    Lfo depthLfo;
+  //  Lfo tuneLfo;
+ //   Lfo depthLfo;
     juce::ADSR adsr;
 
 private:
     void setSample();
-    void updateAngle();
-    void updateAngle(const float fmSample);
-    void setOutputLevel();
+    void updateAngle(const float tuneSample);
+    void updateAngle(const float tuneSample, const float fmSample);
+    void setOutputLevel(const float depthSample);
 
     juce::SmoothedValue<float> offsetHz;
     juce::SmoothedValue<float> amplitude;

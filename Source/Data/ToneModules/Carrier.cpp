@@ -13,9 +13,9 @@
 Carrier::Carrier() {}
 
 
-float Carrier::getNextSample(float fmSample)
+float Carrier::getNextSample(float tuneSample, float depthSample, float fmSample)
 {
-    process(fmSample);
+    process(tuneSample, depthSample,fmSample);
     
     return  getSample() * getOutputLevel() * amplitudeScalar;
 }

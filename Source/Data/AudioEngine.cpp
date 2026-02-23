@@ -19,7 +19,7 @@ AudioEngine::AudioEngine() : tempBuff(1, 1)
 
     for (int i = 0; i < numVoices; ++i)
     {
-        addVoice(new Voice(keyboard));
+        addVoice(new Voice(keyboard, toneLfos));
     }
 }
 
@@ -35,13 +35,16 @@ void AudioEngine::renderVoices(juce::AudioBuffer<float>& buffer, int startSample
 {
     while (--numSamples >= 0)
     {
-
+        // Set Lfos
         for (int i{}; i < 4; ++i)
         {
             tempBuff.clear();
 
+            toneLfos[i].setSamples();
+         
             for (auto* voice : voices)
             {
+                
                 // add all the notes played on a single tone module into the single sample tempBuff
                 voice->renderNextBlock(tempBuff, 0, i);
 

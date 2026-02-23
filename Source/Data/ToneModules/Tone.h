@@ -13,6 +13,7 @@
 #include "Carrier.h"
 #include "FreqMod.h"
 #include "RingMod.h"
+#include "ToneLfos.h"
 
 class Tone
 {
@@ -29,9 +30,19 @@ public:
     bool isActive() const;
 
    
-    float getNextSample();
+    float getNextSample(ToneLfos& toneLfos);
+    
+    void updateFreqMod(const float freqMult, const float tune, const float depth,        
+        const float attack, const float decay, const float sustain, const float release);
 
-    void updateCarrier(const float freqMult, 
+    void updateCarrier(const float freqMult, const float tune, const float depth,
+        const float attack, const float decay, const float sustain, const float release);
+
+    void updateRingMod(const float freqMult, const float tune, const float depth,
+        const float attack, const float decay, const float sustain, const float release);
+
+  
+   /* void updateCarrier(const float freqMult, 
         const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold, 
         const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold,
         const float attack, const float decay, const float sustain, const float release);
@@ -45,7 +56,7 @@ public:
     void updateRingMod(const float freqMult, 
         const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold,
         const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold,
-        const float attack, const float decay, const float sustain, const float release);
+        const float attack, const float decay, const float sustain, const float release);*/
 
     FreqMod fm;
     Carrier cr;
