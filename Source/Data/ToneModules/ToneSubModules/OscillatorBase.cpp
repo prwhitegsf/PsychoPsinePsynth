@@ -21,9 +21,6 @@ void OscillatorBase::prepare(const juce::dsp::ProcessSpec& spec)
     amplitude.reset(spec.sampleRate, 0.05);
     
     adsr.setSampleRate(spec.sampleRate);
-  //  tuneLfo.prepare(spec);
-  //  depthLfo.prepare(spec);
-
 }
 
 void OscillatorBase::setFrequency(const float frequency)
@@ -31,8 +28,8 @@ void OscillatorBase::setFrequency(const float frequency)
     angle = 0.0;
     noteHz = frequency;
     freq = noteHz * frequencyMultiple;
-    auto cyclesPerSample = frequency / sampleRate;
-    angleDelta = cyclesPerSample * twoPi;
+    auto cyclesPerSample = freq / sampleRate;
+    angleDelta = cyclesPerSample * juce::MathConstants<double>::twoPi;
 }
 
 void OscillatorBase::updateParameters(const float freqMult, const float tune, const float amp)
@@ -61,16 +58,14 @@ void  OscillatorBase::process(float tuneSample, float depthSample,const float fm
 void OscillatorBase::reset()
 {
     angleDelta = 0;
-    //tuneLfo.reset();
-   // depthLfo.reset();
     adsr.reset();
 }
 
 
 
 void OscillatorBase::setOutputLevel(const float depthSample)
-{
-       outputLevel = depthSample * amplitude.getNextValue() * adsr.getNextSample();
+{   
+    outputLevel = depthSample * amplitude.getNextValue() * adsr.getNextSample();
 }
 
 
@@ -80,12 +75,15 @@ float OscillatorBase::getNextSample(float tuneSample, float depthSample)
 
     return getSample() * getOutputLevel();
 }
+
+
 float OscillatorBase::getNextSample(float tuneSample, float depthSample, float fmSample)
 {
     process(tuneSample, depthSample,fmSample);
 
     return getSample() * getOutputLevel();
 }
+
 void OscillatorBase::setSample()
 {
     sample = (float)(std::sin(angle));
@@ -94,12 +92,12 @@ void OscillatorBase::setSample()
 
 void OscillatorBase::updateAngle(const float tuneSample)
 {
-    angleDelta = ((freq + tuneSample + offsetHz.getNextValue()) / sampleRate) * twoPi;
+    angleDelta = ((freq + tuneSample + offsetHz.getNextValue()) / sampleRate) * juce::MathConstants<double>::twoPi;
     angle += angleDelta;
 }
 
 void OscillatorBase::updateAngle(const float tuneSample, const float fmSample)
 {
-    angleDelta = ((freq + tuneSample + fmSample + offsetHz.getNextValue()) / sampleRate) * twoPi;
+    angleDelta = ((freq + tuneSample + fmSample + offsetHz.getNextValue()) / sampleRate) * juce::MathConstants<double>::twoPi;
     angle += angleDelta;
 }

@@ -35,11 +35,11 @@ void AudioEngine::renderVoices(juce::AudioBuffer<float>& buffer, int startSample
 {
     while (--numSamples >= 0)
     {
-        // Set Lfos
         for (int i{}; i < 4; ++i)
         {
             tempBuff.clear();
 
+            // Set Lfos
             toneLfos[i].setSamples();
          
             for (auto* voice : voices)

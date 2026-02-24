@@ -10,9 +10,6 @@
 
 #include "FreqMod.h"
 
-
-FreqMod::FreqMod(){}
-
 float FreqMod::getNextSample(float tuneSample, float depthSample)
 {
     process(tuneSample,depthSample);

@@ -11,7 +11,6 @@
 #include "RingMod.h"
 
 
-RingMod::RingMod()  {}
 
 float RingMod::getNextSample(float tuneSample, float depthSample, float carrierSample)
 {

@@ -29,9 +29,8 @@ public:
 
 private:
 
-    inline void updateAngle();
+    void updateAngle();
 
-   // const double twoPi = 2.0 * juce::MathConstants<double>::pi;
     juce::SmoothedValue<float> amplitude;
     
     float freq{}, sample{};

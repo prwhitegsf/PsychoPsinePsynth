@@ -52,17 +52,13 @@ public:
     bool allTonesOff();
 
     void clearActiveOffNotes();
-    //private:
+
+private:
 
     std::array<double, 128>& kboard;
     std::array<ToneLfos, 4>& toneLfos;
 
     std::array<Tone, 4> tones;
-    float currNoteHz{};
-
-    bool latched{ false };
-
-    int numSamps{}, start{};
-
+  
 };
 

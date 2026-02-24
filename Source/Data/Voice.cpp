@@ -33,10 +33,9 @@ void Voice::prepareToPlay(double sampleRate, int samplesPerBlock, int outputChan
 
 void Voice::startNote(int midiNoteNumber, float, juce::SynthesiserSound*, int)
 {
-    currNoteHz = (float)kboard[midiNoteNumber];
     for (auto& tone : tones)
     {
-        tone.setFrequency(currNoteHz);
+        tone.setFrequency((float)kboard[midiNoteNumber]);
         tone.noteOn();
     }
 }
@@ -60,7 +59,7 @@ void Voice::stopNote(float, bool allowTailOff)
 
 void Voice::renderNextBlock(juce::AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
-    outputBuffer.addSample(0, startSample, tones[numSamples].getNextSample(toneLfos[numSamples]));
+    outputBuffer.addSample(0, 0, tones[numSamples].getNextSample(toneLfos[numSamples]));
 }
 
 void Voice::updateCarriers(int idx, const float freqMult, const float tune, const float depth,

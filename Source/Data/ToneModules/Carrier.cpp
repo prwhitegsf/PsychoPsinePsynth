@@ -10,9 +10,6 @@
 
 #include "Carrier.h"
 
-Carrier::Carrier() {}
-
-
 float Carrier::getNextSample(float tuneSample, float depthSample, float fmSample)
 {
     process(tuneSample, depthSample,fmSample);

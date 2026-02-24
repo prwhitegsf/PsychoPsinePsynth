@@ -17,8 +17,6 @@ class Carrier : public OscillatorBase
 {
 public:
 
-    Carrier();
-
     float getNextSample(float tuneSample, float depthSample,float fmSample) override;
 
 private:

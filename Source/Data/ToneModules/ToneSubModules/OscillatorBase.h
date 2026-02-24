@@ -27,15 +27,13 @@ public:
     void process(float tuneSample, float depthSample);
     void process(float tuneSample, float depthSample, const float fmSample);
 
-    inline float getSample() const { return sample; }
-    inline float getFreq() const { return freq; }
-    inline float getOutputLevel() const { return outputLevel; }
+    forcedinline float getSample() const { return sample; }
+    forcedinline float getFreq() const { return freq; }
+    forcedinline float getOutputLevel() const { return outputLevel; }
 
     virtual float getNextSample(float tuneSample, float depthSample);
     virtual float getNextSample(float tuneSample, float depthSample, float sample);
     
-  //  Lfo tuneLfo;
- //   Lfo depthLfo;
     juce::ADSR adsr;
 
 private:
@@ -47,10 +45,10 @@ private:
     juce::SmoothedValue<float> offsetHz;
     juce::SmoothedValue<float> amplitude;
 
-    const double twoPi = 2.0 * juce::MathConstants<double>::pi;
+   // const double twoPi = 2.0 * juce::MathConstants<double>::pi;
     
     float  outputLevel{};
-    float frequencyMultiple{ 1.0 };
+    float frequencyMultiple{ 1.0f };
     float freq{}, noteHz{}, sample{};
     double angle{}, angleDelta{}, sampleRate{ 44100.0 };
 };

@@ -16,9 +16,8 @@
 class RingMod : public OscillatorBase
 {
 public:
-    RingMod();
-
-     float getNextSample(float tuneSample, float depthSample, float sample) override;
+     
+    float getNextSample(float tuneSample, float depthSample, float sample) override;
 
 
 };

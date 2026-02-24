@@ -22,13 +22,11 @@ void Lfo::update(const float frequency, const float amp, bool lfoHold)
     freq = frequency;
     
     if (lfoHold)
-    //if (!frequency || lfoHold)
     {
-        isActive = false;
+        angleDelta = 0;
         return;
     }
 
-    isActive = true;
 
     auto cyclesPerSample = freq / sampleRate;
     angleDelta = cyclesPerSample * juce::MathConstants<double>::twoPi;
@@ -36,7 +34,6 @@ void Lfo::update(const float frequency, const float amp, bool lfoHold)
 
 void Lfo::setSample()
 {
-    // incorporating amplitude here messes up depth Lfo calcs
     sample = (float)(std::sin(angle));
 
     updateAngle();
