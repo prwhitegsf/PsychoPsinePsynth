@@ -18,6 +18,11 @@ class AudioEngine : public juce::Synthesiser
 public:
     AudioEngine();
 
+private:
+    std::array<juce::AudioSampleBuffer, 1> wavetables;
+
+
+public:
     std::array<double, 128> keyboard;
     std::array<ToneLfos, 4> toneLfos;
     std::array<Mixer, 4> mixers;

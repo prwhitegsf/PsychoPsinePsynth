@@ -88,6 +88,8 @@
                   file="Source/Data/ToneModules/ToneSubModules/OscillatorBase.cpp"/>
             <FILE id="YPebZQ" name="OscillatorBase.h" compile="0" resource="0"
                   file="Source/Data/ToneModules/ToneSubModules/OscillatorBase.h"/>
+            <FILE id="Xn0LGA" name="Wavetable.cpp" compile="1" resource="0" file="Source/Data/ToneModules/ToneSubModules/Wavetable.cpp"/>
+            <FILE id="OCdNLU" name="Wavetable.h" compile="0" resource="0" file="Source/Data/ToneModules/ToneSubModules/Wavetable.h"/>
           </GROUP>
           <FILE id="iCbSFm" name="Carrier.cpp" compile="1" resource="0" file="Source/Data/ToneModules/Carrier.cpp"/>
           <FILE id="o1yRc3" name="Carrier.h" compile="0" resource="0" file="Source/Data/ToneModules/Carrier.h"/>
