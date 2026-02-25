@@ -20,11 +20,12 @@ public:
 
 private:
     std::array<juce::AudioSampleBuffer, 1> wavetables;
-
+    void createWavetables();
+    const unsigned int tableSize = 128;
 
 public:
     std::array<double, 128> keyboard;
-    std::array<ToneLfos, 4> toneLfos;
+    std::array<ToneLfos, 4> toneLfos{ ToneLfos(wavetables), ToneLfos(wavetables),ToneLfos(wavetables),ToneLfos(wavetables)};
     std::array<Mixer, 4> mixers;
     
     void renderVoices(juce::AudioBuffer<float>& buffer, int startSample, int numSamples) override;

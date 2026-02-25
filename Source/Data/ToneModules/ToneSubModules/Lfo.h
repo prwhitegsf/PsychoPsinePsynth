@@ -10,12 +10,14 @@
 
 #pragma once
 #include <JuceHeader.h>
+#include "Wavetable.h"
 
 class Lfo
 {
 
 public:
 
+    Lfo(std::array<juce::AudioSampleBuffer,1>& wt);
 
     void prepare(const juce::dsp::ProcessSpec& spec);
     void reset();
@@ -29,6 +31,8 @@ public:
 
 private:
 
+    std::array<juce::AudioSampleBuffer, 1>& wavetables;
+    Wavetable wavetable;
     void updateAngle();
 
     juce::SmoothedValue<float> amplitude;

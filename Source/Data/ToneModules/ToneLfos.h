@@ -18,8 +18,9 @@ class ToneLfos
 
 public:
 
-    void prepare(const juce::dsp::ProcessSpec& spec);
+    explicit ToneLfos(std::array<juce::AudioSampleBuffer, 1>& wt);
 
+    void prepare(const juce::dsp::ProcessSpec& spec);
 
     void updateLfos(
         const float fmTuneRate,  const float fmTuneAmp,  const bool fmTuneHold,

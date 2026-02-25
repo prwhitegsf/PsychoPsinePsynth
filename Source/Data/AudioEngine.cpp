@@ -11,8 +11,10 @@
 #include "AudioEngine.h"
 
 
-AudioEngine::AudioEngine() : tempBuff(1, 1)
+AudioEngine::AudioEngine() 
+    : tempBuff(1, 1)
 {
+    createWavetables();
     addSound(new SynthSound());
 
     setNoteStealingEnabled(false);
@@ -23,6 +25,27 @@ AudioEngine::AudioEngine() : tempBuff(1, 1)
     }
 }
 
+void AudioEngine::createWavetables()
+{
+
+    // Create sine wave in first slot
+    wavetables[0].setSize(1, (int)tableSize + 1);
+    wavetables[0].clear();
+
+    auto* samples = wavetables[0].getWritePointer(0);
+ 
+    auto angleDelta = juce::MathConstants<double>::twoPi / (double)(tableSize - 1);
+    auto currentAngle = 0.0;
+
+    for (unsigned int i{}; i < tableSize; ++i)
+    {
+        auto sample = std::sin(currentAngle);
+        samples[i] += (float)sample;
+        currentAngle += angleDelta;
+    }       
+
+    samples[tableSize] = samples[0];
+}
 
 void AudioEngine::updateMixers(int idx, const float lpFreq, const float lpQ,
     const float hpFreq, const float hpQ, const float gain, const float pan)

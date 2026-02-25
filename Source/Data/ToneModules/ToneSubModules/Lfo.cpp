@@ -10,11 +10,13 @@
 
 #include "Lfo.h"
 
+Lfo::Lfo(std::array<juce::AudioSampleBuffer, 1>& wt) 
+    : wavetables(wt), wavetable(wavetables[0]) { }
 
 void Lfo::prepare(const juce::dsp::ProcessSpec& spec)
 {
     sampleRate = spec.sampleRate;
-}
+   }
 
 void Lfo::update(const float frequency, const float amp, bool lfoHold)
 {
@@ -27,6 +29,7 @@ void Lfo::update(const float frequency, const float amp, bool lfoHold)
         return;
     }
 
+    wavetable.setFrequency(freq, sampleRate);
 
     auto cyclesPerSample = freq / sampleRate;
     angleDelta = cyclesPerSample * juce::MathConstants<double>::twoPi;
@@ -34,7 +37,8 @@ void Lfo::update(const float frequency, const float amp, bool lfoHold)
 
 void Lfo::setSample()
 {
-    sample = (float)(std::sin(angle));
+    sample = wavetable.getNextSample();
+  //  sample = (float)(std::sin(angle));
 
     updateAngle();
 }

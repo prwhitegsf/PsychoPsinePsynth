@@ -10,6 +10,14 @@
 
 #include "ToneLfos.h"
 
+ToneLfos::ToneLfos(std::array<juce::AudioSampleBuffer,1>& wt)
+    : fmTuneLfo(wt),
+    fmDepthLfo(wt),
+    crTuneLfo(wt),
+    crDepthLfo(wt),
+    rmTuneLfo(wt),
+    rmDepthLfo(wt)
+{ }
 
 void ToneLfos::prepare(const juce::dsp::ProcessSpec& spec)
 {
