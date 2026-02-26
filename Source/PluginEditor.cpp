@@ -68,7 +68,7 @@ void PsychoPsinePsynthAudioProcessorEditor::resized()
     
     scaleComponent.setBounds(0, 720, 230, 100);
     keyboardComponent.setBounds(scaleComponent.getRight(), 720, 640, 100);
-    globalHold.setBounds(keyboardComponent.getRight(), 720, 130, 100);
+    globalHold.setBounds(scaleComponent.getRight() + 640, 720, 130, 100);
 }
 
 void PsychoPsinePsynthAudioProcessorEditor::timerCallback()

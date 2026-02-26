@@ -18,7 +18,6 @@ class ToneLfos
 
 public:
 
-    explicit ToneLfos(std::array<juce::AudioSampleBuffer, 1>& wt);
 
     void prepare(const juce::dsp::ProcessSpec& spec);
 
@@ -30,7 +29,7 @@ public:
         const float rmTuneRate,  const float rmTuneAmp,  const bool rmTuneHold,
         const float rmDepthRate, const float rmDepthAmp, const bool rmDepthHold);
     
-    void setSamples();
+    void setSamples(juce::AudioSampleBuffer& wavetable);
 
     float getFmTuneSample();
     float getFmDepthSample();

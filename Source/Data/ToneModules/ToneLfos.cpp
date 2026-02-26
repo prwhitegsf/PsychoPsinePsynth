@@ -10,15 +10,6 @@
 
 #include "ToneLfos.h"
 
-ToneLfos::ToneLfos(std::array<juce::AudioSampleBuffer,1>& wt)
-    : fmTuneLfo(wt),
-    fmDepthLfo(wt),
-    crTuneLfo(wt),
-    crDepthLfo(wt),
-    rmTuneLfo(wt),
-    rmDepthLfo(wt)
-{ }
-
 void ToneLfos::prepare(const juce::dsp::ProcessSpec& spec)
 {
     fmTuneLfo.prepare(spec);
@@ -49,16 +40,16 @@ void ToneLfos::updateLfos(const float fmTuneRate, const float fmTuneAmp, const b
     rmDepthLfo.update(rmDepthRate ? 1.0f / rmDepthRate : 0.0f, rmDepthAmp, rmDepthHold);
 }
 
-void ToneLfos::setSamples()
+void ToneLfos::setSamples(juce::AudioSampleBuffer& wavetable)
 {
-    fmTuneLfo.setSample();
-    fmDepthLfo.setSample();
+    fmTuneLfo.setSample(wavetable);
+    fmDepthLfo.setSample(wavetable);
    
-    crTuneLfo.setSample();
-    crDepthLfo.setSample();
+    crTuneLfo.setSample(wavetable);
+    crDepthLfo.setSample(wavetable);
    
-    rmTuneLfo.setSample();
-    rmDepthLfo.setSample();
+    rmTuneLfo.setSample(wavetable);
+    rmDepthLfo.setSample(wavetable);
 }
 
 float ToneLfos::getFmTuneSample() 

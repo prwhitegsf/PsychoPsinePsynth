@@ -54,11 +54,4 @@ The mixer section provides high and low pass 24db ladder filters along with gain
 
 When used as a plugin, the latched on screen keyboard notes dissapear when the plugin window is closed and re-opened.
 
-High CPU usage - currently performs a full sine calculation for each oscillator in every tone for every sample. This includes all active LFO's.
-- each tone's sub module has a primary oscillator and two lfos.
-- making 9 oscillators per tone (3 each for Freq Mod, Carrier and Ring Mod)
-- with 4 tones per voice, each voice has 36 sine calculations
-- with up to 8 simultaneous voices, that's 288 sine calcs / sample!
-- Currently Lfo's where rate =  0 or hold = true are not calculated
 
-Next step: implement LFO's as wavetables instead.

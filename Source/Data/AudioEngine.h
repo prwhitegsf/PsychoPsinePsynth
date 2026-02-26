@@ -25,7 +25,7 @@ private:
 
 public:
     std::array<double, 128> keyboard;
-    std::array<ToneLfos, 4> toneLfos{ ToneLfos(wavetables), ToneLfos(wavetables),ToneLfos(wavetables),ToneLfos(wavetables)};
+    std::array<ToneLfos, 4> toneLfos;
     std::array<Mixer, 4> mixers;
     
     void renderVoices(juce::AudioBuffer<float>& buffer, int startSample, int numSamples) override;

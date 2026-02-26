@@ -10,13 +10,12 @@
 
 #include "Lfo.h"
 
-Lfo::Lfo(std::array<juce::AudioSampleBuffer, 1>& wt) 
-    : wavetables(wt), wavetable(wavetables[0]) { }
 
 void Lfo::prepare(const juce::dsp::ProcessSpec& spec)
 {
     sampleRate = spec.sampleRate;
-   }
+   
+}
 
 void Lfo::update(const float frequency, const float amp, bool lfoHold)
 {
@@ -25,22 +24,34 @@ void Lfo::update(const float frequency, const float amp, bool lfoHold)
     
     if (lfoHold)
     {
-        angleDelta = 0;
+        isActive = false;
         return;
     }
 
-    wavetable.setFrequency(freq, sampleRate);
-
-    auto cyclesPerSample = freq / sampleRate;
-    angleDelta = cyclesPerSample * juce::MathConstants<double>::twoPi;
+    isActive = true;
+    
+    auto tableSizeOverSampleRate = (float)tableSize / sampleRate;
+    tableDelta = frequency * tableSizeOverSampleRate;
 }
 
-void Lfo::setSample()
-{
-    sample = wavetable.getNextSample();
-  //  sample = (float)(std::sin(angle));
 
-    updateAngle();
+void Lfo::setSample(juce::AudioSampleBuffer& wavetable)
+{
+    if (!isActive)
+        return;
+
+    auto index0 = (unsigned int)currentIndex;
+    auto index1 = index0 + 1;
+    auto frac = currentIndex - (float)index0;
+
+    auto* table = wavetable.getReadPointer(0);
+    auto value0 = table[index0];
+    auto value1 = table[index1];
+
+    sample = value0 + frac * (value1 - value0);
+
+    if ((currentIndex += tableDelta) > (float)tableSize)
+        currentIndex -= (float)tableSize;
 }
 
 
@@ -59,7 +70,3 @@ float Lfo::getAmplitude() const
     return amplitude.getCurrentValue(); 
 }
 
-void Lfo::updateAngle() 
-{ 
-    angle += angleDelta; 
-}

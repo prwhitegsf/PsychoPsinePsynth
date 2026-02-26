@@ -63,7 +63,7 @@ void AudioEngine::renderVoices(juce::AudioBuffer<float>& buffer, int startSample
             tempBuff.clear();
 
             // Set Lfos
-            toneLfos[i].setSamples();
+            toneLfos[i].setSamples(wavetables[0]);
          
             for (auto* voice : voices)
             {
