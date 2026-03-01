@@ -23,7 +23,7 @@ struct SynthSound : public juce::SynthesiserSound
 class Voice : public juce::SynthesiserVoice
 {
 public:
-    Voice(std::array<double, 128>& keyboard, std::array<ToneLfos,4>& tLfos);
+    Voice(std::array<double, 128>& keyboard, std::array<ToneLfos,4>& tLfos, juce::AudioSampleBuffer& wt);
 
     bool canPlaySound(juce::SynthesiserSound* sound) override;
 
@@ -57,7 +57,7 @@ private:
 
     std::array<double, 128>& kboard;
     std::array<ToneLfos, 4>& toneLfos;
-
+    juce::AudioSampleBuffer& wavetable;
     std::array<Tone, 4> tones;
   
 };

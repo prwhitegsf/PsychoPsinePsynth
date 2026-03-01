@@ -51,11 +51,11 @@ bool Tone::isActive() const
     return cr.adsr.isActive();
 }
 
-float Tone::getNextSample(ToneLfos& toneLfo)
+float Tone::getNextSample(ToneLfos& toneLfo, juce::AudioSampleBuffer& wavetable)
 {
-    return  rm.getNextSample(toneLfo.getRmTuneSample(),toneLfo.getRmDepthSample(),
-                cr.getNextSample(toneLfo.getCrTuneSample(),toneLfo.getCrDepthSample(),
-                    fm.getNextSample(toneLfo.getFmTuneSample(), toneLfo.getFmDepthSample())));
+    return  rm.getNextSample(wavetable, toneLfo.getRmTuneSample(),toneLfo.getRmDepthSample(),
+                cr.getNextSample(wavetable, toneLfo.getCrTuneSample(),toneLfo.getCrDepthSample(),
+                    fm.getNextSample(wavetable, toneLfo.getFmTuneSample(), toneLfo.getFmDepthSample())));
 }
 
 void Tone::updateCarrier(const float freqMult, const float tune,const float depth,

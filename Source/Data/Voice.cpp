@@ -12,7 +12,8 @@
 
 
 
-Voice::Voice(std::array<double, 128>& keyboard, std::array<ToneLfos,4>& tLfos) : kboard(keyboard), toneLfos(tLfos)
+Voice::Voice(std::array<double, 128>& keyboard, std::array<ToneLfos,4>& tLfos, juce::AudioSampleBuffer& wt) 
+    : kboard(keyboard), toneLfos(tLfos), wavetable(wt)
 {
 }
 
@@ -59,7 +60,7 @@ void Voice::stopNote(float, bool allowTailOff)
 
 void Voice::renderNextBlock(juce::AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
-    outputBuffer.addSample(0, 0, tones[numSamples].getNextSample(toneLfos[numSamples]));
+    outputBuffer.addSample(0, 0, tones[numSamples].getNextSample(toneLfos[numSamples],wavetable));
 }
 
 void Voice::updateCarriers(int idx, const float freqMult, const float tune, const float depth,

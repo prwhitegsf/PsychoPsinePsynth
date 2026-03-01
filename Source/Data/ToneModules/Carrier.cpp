@@ -10,9 +10,9 @@
 
 #include "Carrier.h"
 
-float Carrier::getNextSample(float tuneSample, float depthSample, float fmSample)
+float Carrier::getNextSample(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample, float fmSample)
 {
-    process(tuneSample, depthSample,fmSample);
+    process(wavetable, tuneSample, depthSample,fmSample);
     
     return  getSample() * getOutputLevel() * amplitudeScalar;
 }

@@ -17,7 +17,7 @@ class Carrier : public OscillatorBase
 {
 public:
 
-    float getNextSample(float tuneSample, float depthSample,float fmSample) override;
+    float getNextSample(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample,float fmSample) override;
 
 private:
     const float amplitudeScalar{ 0.03f };

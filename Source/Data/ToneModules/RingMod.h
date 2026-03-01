@@ -17,7 +17,7 @@ class RingMod : public OscillatorBase
 {
 public:
      
-    float getNextSample(float tuneSample, float depthSample, float sample) override;
+    float getNextSample(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample, float sample) override;
 
 
 };

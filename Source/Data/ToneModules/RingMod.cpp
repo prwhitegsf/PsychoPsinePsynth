@@ -12,9 +12,9 @@
 
 
 
-float RingMod::getNextSample(float tuneSample, float depthSample, float carrierSample)
+float RingMod::getNextSample(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample, float carrierSample)
 {
-    process(tuneSample, depthSample);
+    process(wavetable, tuneSample, depthSample);
 
     auto depth = getOutputLevel();
     return (carrierSample * (1.0f - depth)) + (carrierSample * getSample() * depth);

@@ -21,7 +21,7 @@ AudioEngine::AudioEngine()
 
     for (int i = 0; i < numVoices; ++i)
     {
-        addVoice(new Voice(keyboard, toneLfos));
+        addVoice(new Voice(keyboard, toneLfos,wavetables[0]));
     }
 }
 

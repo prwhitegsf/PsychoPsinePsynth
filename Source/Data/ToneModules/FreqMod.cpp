@@ -10,9 +10,9 @@
 
 #include "FreqMod.h"
 
-float FreqMod::getNextSample(float tuneSample, float depthSample)
+float FreqMod::getNextSample(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample)
 {
-    process(tuneSample,depthSample);
+    process(wavetable, tuneSample,depthSample);
     
     auto fmIndex = (getFreq() + tuneSample) * getOutputLevel();
 

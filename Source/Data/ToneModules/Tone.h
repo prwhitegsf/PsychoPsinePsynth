@@ -30,7 +30,7 @@ public:
     bool isActive() const;
 
    
-    float getNextSample(ToneLfos& toneLfos);
+    float getNextSample(ToneLfos& toneLfos, juce::AudioSampleBuffer& wavetable);
     
     void updateFreqMod(const float freqMult, const float tune, const float depth,        
         const float attack, const float decay, const float sustain, const float release);

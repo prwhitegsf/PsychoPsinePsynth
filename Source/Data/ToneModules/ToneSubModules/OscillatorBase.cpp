@@ -28,8 +28,11 @@ void OscillatorBase::setFrequency(const float frequency)
     angle = 0.0;
     noteHz = frequency;
     freq = noteHz * frequencyMultiple;
-    auto cyclesPerSample = freq / sampleRate;
-    angleDelta = cyclesPerSample * juce::MathConstants<double>::twoPi;
+    //auto cyclesPerSample = freq / sampleRate;
+    //angleDelta = cyclesPerSample * juce::MathConstants<double>::twoPi;
+
+    auto tableSizeOverSampleRate = (float)tableSize / sampleRate;
+    tableDelta = frequency * tableSizeOverSampleRate;
 }
 
 void OscillatorBase::updateParameters(const float freqMult, const float tune, const float amp)
@@ -40,16 +43,18 @@ void OscillatorBase::updateParameters(const float freqMult, const float tune, co
     amplitude.setTargetValue(amp);
 }
  
-void  OscillatorBase::process(float tuneSample, float depthSample)
+void  OscillatorBase::process(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample)
 {
-    setSample();
+    //setSample();
+    setSample(wavetable);
     updateAngle(tuneSample);
     setOutputLevel(depthSample);
 }
     
-void  OscillatorBase::process(float tuneSample, float depthSample,const float fmSample)
+void  OscillatorBase::process(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample,const float fmSample)
 {
-    setSample();
+  //  setSample();
+    setSample(wavetable);
     updateAngle(tuneSample,fmSample);
     setOutputLevel(depthSample);
 }
@@ -58,6 +63,7 @@ void  OscillatorBase::process(float tuneSample, float depthSample,const float fm
 void OscillatorBase::reset()
 {
     angleDelta = 0;
+    tableDelta = 0;
     adsr.reset();
 }
 
@@ -69,17 +75,17 @@ void OscillatorBase::setOutputLevel(const float depthSample)
 }
 
 
-float OscillatorBase::getNextSample(float tuneSample, float depthSample)
+float OscillatorBase::getNextSample(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample)
 {
-    process(tuneSample, depthSample);
+    process(wavetable, tuneSample, depthSample);
 
     return getSample() * getOutputLevel();
 }
 
 
-float OscillatorBase::getNextSample(float tuneSample, float depthSample, float fmSample)
+float OscillatorBase::getNextSample(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample, float fmSample)
 {
-    process(tuneSample, depthSample,fmSample);
+    process(wavetable, tuneSample, depthSample,fmSample);
 
     return getSample() * getOutputLevel();
 }
@@ -90,14 +96,44 @@ void OscillatorBase::setSample()
 }
 
 
+void OscillatorBase::setSample(juce::AudioSampleBuffer& wavetable)
+{
+    auto index0 = (unsigned int)currentIndex;
+    auto index1 = index0 + 1;
+    auto frac = currentIndex - (float)index0;
+
+    auto* table = wavetable.getReadPointer(0);
+    auto value0 = table[index0];
+    auto value1 = table[index1];
+
+    sample = value0 + frac * (value1 - value0);
+
+  /*  if ((currentIndex += tableDelta) > (float)tableSize)
+        currentIndex -= (float)tableSize;*/
+
+
+
+}
+
 void OscillatorBase::updateAngle(const float tuneSample)
 {
-    angleDelta = ((freq + tuneSample + offsetHz.getNextValue()) / sampleRate) * juce::MathConstants<double>::twoPi;
-    angle += angleDelta;
+    angleDelta = ((float)tableSize * (freq + tuneSample + offsetHz.getNextValue())) / sampleRate;
+    tableDelta = angleDelta >= 0 ? angleDelta : angleDelta + (float)tableSize;
+
+   // tableDelta = ((float)tableSize * (freq + tuneSample + offsetHz.getNextValue())) / sampleRate;
+    if ((currentIndex += tableDelta) > (float)tableSize)
+        currentIndex -= (float)tableSize;
+   // angleDelta = ((freq + tuneSample + offsetHz.getNextValue()) / sampleRate) * juce::MathConstants<double>::twoPi;
+   // angle += angleDelta;
 }
 
 void OscillatorBase::updateAngle(const float tuneSample, const float fmSample)
 {
-    angleDelta = ((freq + tuneSample + fmSample + offsetHz.getNextValue()) / sampleRate) * juce::MathConstants<double>::twoPi;
-    angle += angleDelta;
+    angleDelta = ((float)tableSize * (freq + tuneSample + fmSample + offsetHz.getNextValue())) / sampleRate;
+    tableDelta = angleDelta >= 0 ? angleDelta : angleDelta + (float)tableSize;
+    //tableDelta = ((float)tableSize * (freq + tuneSample + fmSample + offsetHz.getNextValue())) / sampleRate;
+    if ((currentIndex += tableDelta) > (float)tableSize)
+        currentIndex -= (float)tableSize;
+  //  angleDelta = ((freq + tuneSample + fmSample + offsetHz.getNextValue()) / sampleRate) * juce::MathConstants<double>::twoPi;
+   // angle += angleDelta;
 }
