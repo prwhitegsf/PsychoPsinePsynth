@@ -300,6 +300,7 @@ void PsychoPsinePsynthAudioProcessor::updateScale()
         scale.baseNote = (int)baseNote;
         scale.currScale = (int)scaleSelect;
         scale.setKeyboard(synth.keyboard, (int)scaleSelect);
+        scale.hasChanged = true;
 
     }
 }

@@ -35,7 +35,10 @@ PsychoPsinePsynthAudioProcessorEditor::PsychoPsinePsynthAudioProcessorEditor (Ps
     initLabel(mixerLabel, "Mixer");
 
     addAndMakeVisible(scaleComponent);
-    addAndMakeVisible(keyboardComponent);
+    if (juce::JUCEApplication::isStandaloneApp())
+    {
+        addAndMakeVisible(keyboardComponent);
+    }
     addAndMakeVisible(globalHold);
 
     setSize(1000, 830);
@@ -49,7 +52,17 @@ PsychoPsinePsynthAudioProcessorEditor::~PsychoPsinePsynthAudioProcessorEditor()
 //==============================================================================
 void PsychoPsinePsynthAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::whitesmoke);
+    g.fillAll(juce::Colours::darkgrey);
+   
+    if (!juce::JUCEApplication::isStandaloneApp())
+    {
+        g.setColour(juce::Colour(15,15,15));
+        juce::Rectangle<float> filler(250, 720, 500, 100);
+        g.fillRect(filler);
+      
+        g.setColour(juce::Colour(105,105,105));
+        g.drawText("... RESERVED FOR FUTURE USE ...",filler, juce::Justification::centred,true);
+    }
 }
 
 void PsychoPsinePsynthAudioProcessorEditor::resized()
@@ -66,16 +79,30 @@ void PsychoPsinePsynthAudioProcessorEditor::resized()
     rmLabel.setBounds(0, 390, 1000, 20);
     mixerLabel.setBounds(0, 580, 1000, 20);
     
-    scaleComponent.setBounds(0, 720, 230, 100);
-    keyboardComponent.setBounds(scaleComponent.getRight(), 720, 640, 100);
-    globalHold.setBounds(scaleComponent.getRight() + 640, 720, 130, 100);
+    if (juce::JUCEApplication::isStandaloneApp())
+    {
+        scaleComponent.setBounds(0, 720, 250, 100);
+        keyboardComponent.setBounds(scaleComponent.getRight(), 720, 500, 100);
+        globalHold.setBounds(scaleComponent.getRight() + 500, 720, 250, 100);
+    }
+    else 
+    {
+        scaleComponent.setBounds(0, 720, 250, 100);
+        globalHold.setBounds(scaleComponent.getRight() + 500, 720, 250, 100);
+
+    }
 }
 
 void PsychoPsinePsynthAudioProcessorEditor::timerCallback()
 {
     scaleComponent.notesPerOctave.setText(juce::String(audioProcessor.scale.notesPerOctave), juce::dontSendNotification);
-    keyboardComponent.setBaseNote(audioProcessor.scale.baseNote);
-    keyboardComponent.setNotesPerOctave(audioProcessor.scale.notesPerOctave);
+
+    if (audioProcessor.scale.hasChanged)
+    {
+        keyboardComponent.setBaseNote(audioProcessor.scale.baseNote);
+        keyboardComponent.setNotesPerOctave(audioProcessor.scale.notesPerOctave);
+        audioProcessor.scale.hasChanged = false;
+    }
 
 
 

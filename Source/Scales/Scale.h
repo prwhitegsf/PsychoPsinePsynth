@@ -18,6 +18,7 @@ class Scale
 public:
     Scale();
 
+    bool hasChanged{ false };
     size_t currScale{};
     int baseNote{ 69 };
     int notesPerOctave{};

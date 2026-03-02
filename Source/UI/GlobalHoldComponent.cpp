@@ -39,13 +39,13 @@ void GlobalHoldComponent::paint (juce::Graphics& g)
 {
     g.fillAll(juce::Colour(20,20,20));
     g.setColour(juce::Colours::grey);
-    juce::Line<float> horizontalDivider(0, 0, 130, 1);
+    juce::Line<float> horizontalDivider(0, 0, 250, 1);
     g.drawLine(horizontalDivider);
 }
 
 void GlobalHoldComponent::resized()
 {
-    componentLabel.setBounds(0, 5, 130, 15);
-    holdAll.setBounds(25, componentLabel.getBottom()+5, 80, 20);
-    releaseAll.setBounds(25, holdAll.getBottom()+10, 80, 20);
+    componentLabel.setBounds(50, 5, 130, 15);
+    holdAll.setBounds(75, componentLabel.getBottom()+5, 80, 20);
+    releaseAll.setBounds(75, holdAll.getBottom()+10, 80, 20);
 }
