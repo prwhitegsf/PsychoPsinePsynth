@@ -36,7 +36,7 @@ public:
 
 
 private:
-    static const int numVoices = 8;
+    const int numVoices = 8;
     juce::AudioBuffer<float> tempBuff;
 
 };

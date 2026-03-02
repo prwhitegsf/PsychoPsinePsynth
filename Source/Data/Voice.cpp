@@ -60,7 +60,7 @@ void Voice::stopNote(float, bool allowTailOff)
 
 void Voice::renderNextBlock(juce::AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
-    outputBuffer.addSample(0, 0, tones[numSamples].getNextSample(toneLfos[numSamples],wavetable));
+    outputBuffer.addSample(0, startSample, tones[numSamples].getNextSample(toneLfos[numSamples],wavetable));
 }
 
 void Voice::updateCarriers(int idx, const float freqMult, const float tune, const float depth,

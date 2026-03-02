@@ -16,26 +16,23 @@ class Lfo
 
 public:
 
+    Lfo();
 
     void prepare(const juce::dsp::ProcessSpec& spec);
-    void reset();
     void update(const float frequency, const float amp, bool lfoHold);
     void setSample(juce::AudioSampleBuffer& wavetable);
+    
     float getNextSample();
- 
     float getAmplitude() const;
 
+   
+private:
     bool isActive{ false };
 
-private:
-
-
     juce::SmoothedValue<float> amplitude;
-    
-    float freq{}, sample{};
-    double angle{}, angleDelta{}, sampleRate{ 44100.0 };
+    float freq, sample, sampleRate;
+    float currentIndex, tableDelta, angleDelta;
 
-    const int tableSize = 127;
-    float currentIndex = 0.0f, tableDelta = 0.0f;
+    const int tableSize;
 
 };

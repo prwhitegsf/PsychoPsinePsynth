@@ -10,10 +10,15 @@
 
 #include "Lfo.h"
 
+Lfo::Lfo()
+    : freq(0.0f), sample(0.0f), sampleRate(44100.0f),
+    currentIndex(0.0f), tableDelta(0.0f), angleDelta(0.0f),
+    tableSize(127)
+{ }
 
 void Lfo::prepare(const juce::dsp::ProcessSpec& spec)
 {
-    sampleRate = spec.sampleRate;
+    sampleRate = (float)spec.sampleRate;
    
 }
 
@@ -55,10 +60,6 @@ void Lfo::setSample(juce::AudioSampleBuffer& wavetable)
 }
 
 
-void Lfo::reset()
-{
-    angleDelta = 0;
-}
 
 float Lfo::getNextSample() 
 {

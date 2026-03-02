@@ -63,8 +63,6 @@ void Tone::updateCarrier(const float freqMult, const float tune,const float dept
 {
     cr.updateParameters(freqMult, tune, depth);
     cr.adsr.setParameters(juce::ADSR::Parameters(attack, decay, sustain, release));
-   // cr.tuneLfo.update(tuneLfoRate ? 1.0f / tuneLfoRate : 0.0f, tuneLfoAmp, tuneLfoHold);
-   // cr.depthLfo.update(depthLfoRate ? 1.0f / depthLfoRate : 0.0f, depthLfoAmp, depthLfoHold);
 }
 
 void Tone::updateFreqMod(const float freqMult, const float tune, const float depth,
@@ -72,49 +70,11 @@ void Tone::updateFreqMod(const float freqMult, const float tune, const float dep
 {
     fm.updateParameters(freqMult, tune, depth);
     fm.adsr.setParameters(juce::ADSR::Parameters(attack, decay, sustain, release));
-  //  fm.tuneLfo.update(tuneLfoRate ? 1.0f / tuneLfoRate : 0.0f, tuneLfoAmp, tuneLfoHold);
- //   fm.depthLfo.update(depthLfoRate ? 1.0f / depthLfoRate : 0.0f, depthLfoAmp, depthLfoHold);
 }
 
-void Tone::updateRingMod(const float freqMult,const float tune, const float depth,    
+void Tone::updateRingMod(const float freqMult, const float tune, const float depth,
     const float attack, const float decay, const float sustain, const float release)
 {
     rm.updateParameters(freqMult, tune, depth);
     rm.adsr.setParameters(juce::ADSR::Parameters(attack, decay, sustain, release));
- //   rm.tuneLfo.update(tuneLfoRate ? 1.0f / tuneLfoRate : 0.0f, tuneLfoAmp, tuneLfoHold);
-  //  rm.depthLfo.update(depthLfoRate ? 1.0f / depthLfoRate : 0.0f, depthLfoAmp, depthLfoHold);
 }
-/*
-void Tone::updateCarrier(const float freqMult, 
-    const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold, 
-    const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold,
-    const float attack, const float decay, const float sustain, const float release)
-{
-    cr.updateParameters(freqMult, tune, depth);
-    cr.adsr.setParameters(juce::ADSR::Parameters(attack, decay, sustain, release));
-    cr.tuneLfo.update(tuneLfoRate ? 1.0f / tuneLfoRate : 0.0f, tuneLfoAmp, tuneLfoHold);
-    cr.depthLfo.update(depthLfoRate ? 1.0f / depthLfoRate : 0.0f, depthLfoAmp, depthLfoHold);
-}
-
-void Tone::updateFreqMod(const float freqMult, 
-    const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold, 
-    const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold, 
-    const float attack, const float decay, const float sustain, const float release)
-{
-    fm.updateParameters(freqMult, tune, depth);
-    fm.adsr.setParameters(juce::ADSR::Parameters(attack, decay, sustain, release));
-    fm.tuneLfo.update(tuneLfoRate ? 1.0f / tuneLfoRate : 0.0f, tuneLfoAmp, tuneLfoHold);
-    fm.depthLfo.update(depthLfoRate ? 1.0f / depthLfoRate : 0.0f, depthLfoAmp, depthLfoHold);
- }
-
-void Tone::updateRingMod(const float freqMult, 
-    const float tune, const float tuneLfoRate, const float tuneLfoAmp, bool tuneLfoHold,
-    const float depth, const float depthLfoRate, const float depthLfoAmp, bool depthLfoHold,
-    const float attack, const float decay, const float sustain, const float release)
-{
-   rm.updateParameters(freqMult, tune, depth);
-   rm.adsr.setParameters(juce::ADSR::Parameters(attack, decay, sustain, release));
-   rm.tuneLfo.update(tuneLfoRate ? 1.0f / tuneLfoRate : 0.0f, tuneLfoAmp, tuneLfoHold);
-   rm.depthLfo.update(depthLfoRate ? 1.0f / depthLfoRate : 0.0f, depthLfoAmp, depthLfoHold);
-}
-*/

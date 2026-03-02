@@ -21,7 +21,7 @@ public:
 
     void prepare(const juce::dsp::ProcessSpec& spec);
     void setFrequency(const float frequency);
-    void updateParameters(const float freqMult, const float tune, const float amp);
+    void updateParameters(const float frequencyMult, const float tune, const float amp);
     void reset();
 
     void process(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample);
@@ -33,26 +33,25 @@ public:
 
     virtual float getNextSample(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample);
     virtual float getNextSample(juce::AudioSampleBuffer& wavetable, float tuneSample, float depthSample, float sample);
-    
+   
     juce::ADSR adsr;
+ 
 
 private:
-    void setSample();
+    
+    juce::SmoothedValue<float> offsetHz;
+    juce::SmoothedValue<float> amplitude;
+ 
     void setSample(juce::AudioSampleBuffer& wavetable);
     void updateAngle(const float tuneSample);
     void updateAngle(const float tuneSample, const float fmSample);
     void setOutputLevel(const float depthSample);
 
-    juce::SmoothedValue<float> offsetHz;
-    juce::SmoothedValue<float> amplitude;
+    float outputLevel;
+    float freqMult, freq, noteHz;
+    float sample, sampleRate;
+    float currentIndex, tableDelta, angleDelta;
 
-    
-    float  outputLevel{};
-    float frequencyMultiple{ 1.0f };
-    float freq{}, noteHz{}, sample{};
-    double angle{}, angleDelta{}, sampleRate{ 44100.0 };
-
-    const int tableSize = 127;
-    float currentIndex = 0.0f, tableDelta = 0.0f;
-
+    const int tableSize;
+   
 };
