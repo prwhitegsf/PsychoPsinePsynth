@@ -5,6 +5,10 @@
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginName="PsychoPsinePsynth">
   <MAINGROUP id="fcTRpN" name="PsychoPsinePsynth">
+    <GROUP id="{E812866B-73FD-9926-0925-6249D71B7B13}" name="Resources">
+      <FILE id="Auo3K5" name="scales.xml" compile="0" resource="1" file="Resources/scales.xml"
+            xcodeResource="1"/>
+    </GROUP>
     <GROUP id="{1DE0CD54-F5BC-9AF4-3563-9C4DAF72C933}" name="Source">
       <GROUP id="{83C47E5E-2CED-3AA2-6B4E-32CCE5A416D5}" name="Scales">
         <FILE id="dUs8i1" name="Scale.cpp" compile="1" resource="0" file="Source/Scales/Scale.cpp"/>

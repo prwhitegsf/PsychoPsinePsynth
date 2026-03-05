@@ -12,8 +12,33 @@
 
 Scale::Scale()
 {
+    getBinary();
 }
+void Scale::getBinary()
+{
+    // 1. Get the XML data as a string from the BinaryData namespace
+    const char* xmlString = BinaryData::scales_xml; // The name is auto-generated based on the filename
+    int xmlStringSize = BinaryData::scales_xmlSize;
 
+    // 2. Parse the XML string into a unique_ptr<XmlElement>
+    std::unique_ptr<juce::XmlElement> xml = juce::XmlDocument::parse(juce::String::createStringFromData(xmlString, xmlStringSize));
+
+    juce::String ratioList;
+    // 3. Check if parsing was successful and use the element
+    if (xml != nullptr && xml->hasTagName("scales")) // Check for the main tag name
+    {
+        for (auto* e : xml->getChildIterator())
+        {
+            if (e->hasTagName("scale"))
+            {
+                names.add(e->getAttributeValue(0));
+                ratios.push_back({});
+                for (auto* ce : e->getChildElement(0)->getChildIterator())
+                    ratios.back().push_back(ce->getAllSubText().getDoubleValue());
+            }
+        }
+    }
+}
 
 void Scale::setKeyboard(std::array<double, 128>& keyboard, int idx)
 {

@@ -25,7 +25,8 @@ PsychoPsinePsynthAudioProcessorEditor::PsychoPsinePsynthAudioProcessorEditor (Ps
     addAndMakeVisible(toneComponent2);
     addAndMakeVisible(toneComponent3);
 
-
+    //getBinary();
+    
     keyboardComponent.setMidiChannel(2);
     keyboardState.addListener(&audioProcessor.getMidiMessageCollector());
 
@@ -33,6 +34,10 @@ PsychoPsinePsynthAudioProcessorEditor::PsychoPsinePsynthAudioProcessorEditor (Ps
     initLabel(crLabel, "Carrier");
     initLabel(rmLabel, "Ring Mod");
     initLabel(mixerLabel, "Mixer");
+
+
+
+
 
     addAndMakeVisible(scaleComponent);
     if (juce::JUCEApplication::isStandaloneApp())
@@ -49,6 +54,39 @@ PsychoPsinePsynthAudioProcessorEditor::~PsychoPsinePsynthAudioProcessorEditor()
     keyboardState.removeListener(&audioProcessor.getMidiMessageCollector());
 }
 
+/*
+void PsychoPsinePsynthAudioProcessorEditor::getBinary()
+{
+// 1. Get the XML data as a string from the BinaryData namespace
+    const char* xmlString = BinaryData::scaleTest_xml; // The name is auto-generated based on the filename
+    int xmlStringSize = BinaryData::scaleTest_xmlSize;
+
+// 2. Parse the XML string into a unique_ptr<XmlElement>
+    std::unique_ptr<juce::XmlElement> xml = juce::XmlDocument::parse(juce::String::createStringFromData(xmlString, xmlStringSize));
+
+    juce::String ratioList;
+// 3. Check if parsing was successful and use the element
+    if (xml != nullptr && xml->hasTagName("scales")) // Check for the main tag name
+    {
+        for (auto* e : xml->getChildIterator())
+        {
+            if (e->hasTagName("scale"))
+            {
+                names.add(e->getAttributeValue(0));
+                ratios.push_back({});
+                for (auto* ce : e->getChildElement(0)->getChildIterator())
+                    ratios.back().push_back(ce->getAllSubText().getDoubleValue());
+
+            }
+
+     
+        }
+   
+    }
+    scaleName = names[1];
+   scaleNotes = juce::String(ratios[1][1]);
+}
+*/
 //==============================================================================
 void PsychoPsinePsynthAudioProcessorEditor::paint (juce::Graphics& g)
 {
@@ -61,7 +99,7 @@ void PsychoPsinePsynthAudioProcessorEditor::paint (juce::Graphics& g)
         g.fillRect(filler);
       
         g.setColour(juce::Colour(105,105,105));
-        g.drawText("... RESERVED FOR FUTURE USE ...",filler, juce::Justification::centred,true);
+        g.drawText("... reserved for future use ...", filler, juce::Justification::centred, true);
     }
 }
 
@@ -71,8 +109,6 @@ void PsychoPsinePsynthAudioProcessorEditor::resized()
     toneComponent1.setBounds(toneComponent0.getRight(), 10, 250, 710);
     toneComponent2.setBounds(toneComponent1.getRight(), 10, 250, 710);
     toneComponent3.setBounds(toneComponent2.getRight(), 10, 250, 710);
-
-
 
     fmLabel.setBounds(0, 0, 1000, 20);
     crLabel.setBounds(0, 200, 1000, 20);
@@ -103,9 +139,6 @@ void PsychoPsinePsynthAudioProcessorEditor::timerCallback()
         keyboardComponent.setNotesPerOctave(audioProcessor.scale.notesPerOctave);
         audioProcessor.scale.hasChanged = false;
     }
-
-
-
 
     if (globalHold.holdAll.getToggleState())
     {
